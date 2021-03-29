@@ -20,8 +20,7 @@ import VoiceNative from './screens/Test.js';
 function App(){
   return (
     <>
-          <Text>Visible</Text>
-          <VoiceNative />
+      <VoiceNative />
     </>
   );
 };
