@@ -90,14 +90,14 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
+  TextInput,
   View,
   Image,
   TouchableHighlight,
   ScrollView,
 } from 'react-native';
+import Voice from 'react-native-voice';   // import Voice
 
-// import Voice
-import Voice from 'react-native-voice';
 
 const App = () => {
   const [pitch, setPitch] = useState('');
@@ -106,6 +106,11 @@ const App = () => {
   const [started, setStarted] = useState('');
   const [results, setResults] = useState([]);
   const [partialResults, setPartialResults] = useState([]);
+  const [editableResult, setEditableResult] = useState(false);
+  const [finalResult, setFinalResult] = useState([]);
+
+  //testing
+  const [editableText, setEditableText] = useState('');
 
   useEffect(() => {
     //Callbacks for process statuses
@@ -208,6 +213,20 @@ const App = () => {
       console.error(e);
     }
   };
+
+  //ENABLE RESULT EDITTING
+  const enableResultEdit = async () => {
+    setEditableResult(true);
+  };
+
+  const saveFinalResult = async () => {
+    if(results.length === 0){
+      alert("Please record speech")
+    }
+    else{
+      alert("Speech");
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -263,15 +282,27 @@ const App = () => {
         <ScrollView style={{marginBottom: 42}}>
           {results.map((result, index) => {
             return (
-              <Text
+              <TextInput
+                editable={editableResult}
                 key={`result-${index}`}
                 style={styles.textStyle}>
                 {result}
-              </Text>
+              </TextInput>
             );
           })}
         </ScrollView>
+        
+        <ScrollView style={{marginBottom:42}}>
+        <Text>
+          {editableText ?
+            "${editableText}" : "Please select the correct speech combination"
+          }
+        </Text>
+      
+        </ScrollView>
+
         <View style={styles.horizontalView}>
+          {/* STOP RECORDING BUTTON */}
           <TouchableHighlight
             onPress={stopRecognizing}
             style={styles.buttonStyle}>
@@ -279,13 +310,15 @@ const App = () => {
               Stop
             </Text>
           </TouchableHighlight>
+          {/* RESULTS EDIT BUTTON */}
           <TouchableHighlight
-            onPress={cancelRecognizing}
+            onPress={enableResultEdit}
             style={styles.buttonStyle}>
             <Text style={styles.buttonTextStyle}>
-              Cancel
+              Edit
             </Text>
           </TouchableHighlight>
+          {/* DESTROY RESULT BUTTON */}
           <TouchableHighlight
             onPress={destroyRecognizer}
             style={styles.buttonStyle}>
@@ -293,6 +326,16 @@ const App = () => {
               Destroy
             </Text>
           </TouchableHighlight>
+          {/* SAVE FINAL RESULT BUTTON */}
+          {/* RESULTS EDIT BUTTON */}
+          <TouchableHighlight
+            onPress={saveFinalResult}
+            style={styles.buttonStyle}>
+            <Text style={styles.buttonTextStyle}>
+              Done
+            </Text>
+          </TouchableHighlight>
+          
         </View>
       </View>
     </SafeAreaView>
