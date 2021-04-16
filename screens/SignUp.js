@@ -4,7 +4,7 @@ import { View, Text, Image, StyleSheet, KeyboardAvoidingView, ScrollView,Touchab
 import auth from '@react-native-firebase/auth';
 import PassMeter from "react-native-passmeter";
 
-const TestSignUp = ({navigation}) => {
+const SignUp = ({navigation}) => {
 
     const [user, setUser] = useState();
     const [name, setName] = useState("");
@@ -208,4 +208,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default TestSignUp
+export default SignUp

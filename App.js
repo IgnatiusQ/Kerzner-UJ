@@ -7,8 +7,8 @@ import {
   StatusBar,
 } from 'react-native';
 import VoiceNative from './screens/Test.js';
-import TestLogin from './screens/TestLogin';
-import TestSignUp from './screens/TestSignUp';
+import Login from './screens/Login.js';
+import SignUp from './screens/SignUp.js';
 //INSTALLED LIBRARIES:
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -27,9 +27,9 @@ function App(){
         
       />
       <NavigationContainer style={styles.container}>
-        <Stack.Navigator initialRouteName = 'TestSignUp'>
-          <Stack.Screen name='TestLogin' component={TestLogin} options={{headerShown:false}}/>
-          <Stack.Screen name='TestSignUp' component={TestSignUp} options={{headerShown:false}}/>
+        <Stack.Navigator initialRouteName = 'Login'>
+          <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
+          <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
           <Stack.Screen name='VoiceNative' component={VoiceNative} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>

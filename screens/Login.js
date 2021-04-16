@@ -1,11 +1,15 @@
 import React from 'react'
 import { View, Text,StyleSheet, TextInput, Button, TouchableOpacity, Linking, Image } from 'react-native'
 import { useState } from 'react/cjs/react.development'
+import SignUp from './SignUp';
 //INSTALLED PACKAGES:
 
-const TestLogin = () => {
+const Login = ({navigation}) => {
     const [passwordShowHide, setPasswordShowHide] = useState(true);
 
+    const SignUpButton = () =>{
+        navigation.navigate(SignUp);
+    }
     return (
         <View style={styles.View1}>
             <View>
@@ -36,14 +40,21 @@ const TestLogin = () => {
                         Log In
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.LogSignButton}>
+                <TouchableOpacity
+                    style={styles.LogSignButton}
+                    onPress={SignUpButton}
+                >
                     <Text style={styles.LogSignText}>
                         Sign Up
                     </Text>
                 </TouchableOpacity>
-                <Text style={styles.ForgotPassText}>
-                    Forgot Password?
-                </Text>
+                <TouchableOpacity
+                    style={styles.ForgotPassButton}
+                >
+                    <Text style={styles.ForgotPassText}>
+                        Forgot Password?
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -110,14 +121,17 @@ const styles = StyleSheet.create({
         color: "#FFFFFF",
         marginTop:10,
     },
-    ForgotPassText:{
+    ForgotPassButton:{
+        backgroundColor:"transparent",
         alignSelf:"center",
+    },
+    ForgotPassText:{
         color:"#F2651C",
         fontSize:16,
         fontFamily:"Inter",
         fontWeight:"600",
-        marginTop:45,
+        marginTop:10,
     }
 });
 
-export default TestLogin
+export default Login
