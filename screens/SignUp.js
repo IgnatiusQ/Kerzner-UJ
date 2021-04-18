@@ -1,28 +1,41 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text, Image, StyleSheet, KeyboardAvoidingView, ScrollView,TouchableOpacity, TextInput, Alert, LogBox, Platform } from 'react-native'
+import { View, Text, Image, StyleSheet, KeyboardAvoidingView, ScrollView,TouchableOpacity, TextInput, Alert, LogBox, Platform, StatusBar } from 'react-native'
 //INSTALLED LIBRARIES:
 import auth from '@react-native-firebase/auth';
+import PasswordInputText from 'react-native-hide-show-password-input';
 import PassMeter from "react-native-passmeter";
 
 const SignUp = ({navigation}) => {
-
-    const [user, setUser] = useState();
+    //INPUT STATE-VALUES & FUNCTION-UPDATORS
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [finalPassword, setFinalPassword] = useState("");
+    
+    //USER & DATABASE STATES
+    const [initializing, setInitializing] = useState(true);
+    const [user, setUser] = useState();
+    
+    //ERROR MESSAGE
     let errorMessage = "";
-    //PASSWORD METER:
+    
+    //PASSWORD  STRENGTH METER
     const MAX_LEN = 8,
         MIN_LEN = 6,
         PASS_LABELS = ["Too Short", "Weak", "Good", "Strong", "Strong"];
-    const [showMeter, setShowMeter] = useState(false);
 
-    useEffect(()=>{
-        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
-    });
 
+    //HANDLING USER STATE CHANGES
+    function onAuthStateChanged(user){
+        setUser(user);
+        if(initializing) {
+            setInitializing(false);
+        }
+    };
+
+    //ALERT BOX ERRORS
     const formErrors = () =>{
         if(errorMessage!==""){
             Alert.alert(
@@ -44,8 +57,8 @@ const SignUp = ({navigation}) => {
         }
     }
 
+    //SIGN UP BOTTON EVENT-HANDLER
     const signUp = async =>{
-        let iterrator = 0;
         if(name!=="" & phone!=="" & email!=="" & password!=="" & confirmPassword!==""){
             let numberPattern = /^08[0-9]{9,}$/;
 
@@ -77,22 +90,35 @@ const SignUp = ({navigation}) => {
         console.log(errorMessage);
     };
 
+    useEffect(()=>{
+        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber;
+    }, []);
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS==="android"?"height":"height"}
             style={styles.container}
         >
-            
+            <StatusBar
+                animated={true}
+                backgroundColor='#F9F9F9'
+                networkActivityIndicatorVisible={true}
+                animated={true}
+            />
                 <ScrollView
                     style={styles.View1}
                     alignItems="center"
                 >
+                    <View style={styles.textSection}>
                     <Text style={styles.SignUpText}>
                         Sign Up
                     </Text>
+                </View>
                     <Image
                         style={styles.UjImage}
-                        source={{uri:'https://studentroom.co.za/wiki/wp-content/uploads/2020/12/uj-logo-768x402.jpg'}}
+                        source={require('../image_props/logo_white.jpg')}
                     />
                     <TextInput
                         style={styles.InputBox}
@@ -118,14 +144,11 @@ const SignUp = ({navigation}) => {
                         value={email}
                         onChangeText={(text)=>setEmail(text)}
                     />
-                    <TextInput
-                        style={styles.InputBox}
-                        placeholder="Password"
-                        textContentType='password'
-                        keyboardType='visible-password'
-                        maxLength={8}
+                    <PasswordInputText
+                        style={styles.InputBoxPassword}
+                        // placeholder="Password"
                         value={password}
-                        onChangeText={(text)=>setPassword(text)}
+                        onChangeText={(password)=>setPassword(password)}
                     />
                     <PassMeter
                         style={styles.passMeter}
@@ -163,19 +186,23 @@ const styles = StyleSheet.create({
     },
     View1:{
         width: '100%',
-        // alignItems: 'center',
         height:'100%',
         backgroundColor:'#FFFFFF',
     },
+    textSection:{
+        borderBottomColor:'#E4E4E4',
+        borderBottomWidth:1,
+    },
     SignUpText:{
-        fontFamily:"Sherif",
+        fontWeight:'bold',
         alignSelf:"center",
         fontSize:20,
-        color:"#000000",
-        
+        color:"#F2651C",
+        marginVertical:5,
     },
     UjImage:{
-        width:250,
+        marginTop:10,
+        width:120,
         height:120,
         resizeMode:'stretch',
         alignSelf:'center',
@@ -198,7 +225,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         height:40,
         width:320,
-        marginTop:100,
+        marginTop:80,
     },
     SignUpButtonText:{
         fontFamily:"Inter",

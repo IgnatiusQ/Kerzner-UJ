@@ -7,8 +7,11 @@ import {
   StatusBar,
 } from 'react-native';
 import VoiceNative from './screens/Test.js';
+import Splash from './screens/Splash.js';
+import GetStarted from './screens/GetStarted.js';
 import Login from './screens/Login.js';
 import SignUp from './screens/SignUp.js';
+import Main from './screens/Main.js';
 //INSTALLED LIBRARIES:
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -21,15 +24,17 @@ function App(){
     <>
       <StatusBar
         animated={true}
-        backgroundColor="transparent"
+        backgroundColor='transparent'
         networkActivityIndicatorVisible={true}
         animated={true}
-        
       />
       <NavigationContainer style={styles.container}>
-        <Stack.Navigator initialRouteName = 'Login'>
+        <Stack.Navigator initialRouteName = 'GetStarted'>
+          <Stack.Screen name='Splash' component={Splash} options={{headerShown:false}}/>
+          <Stack.Screen name='GetStarted' component={GetStarted} options={{headerShown:false}}/>
           <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
           <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
+          <Stack.Screen name='Main' component={Main} options={{headerShown:false}}/>
           <Stack.Screen name='VoiceNative' component={VoiceNative} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>

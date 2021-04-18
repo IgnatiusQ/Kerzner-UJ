@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "227744421324",
-    "project_id": "kerzneruj",
-    "storage_bucket": "kerzneruj.appspot.com"
+    "project_number": "33228726875",
+    "project_id": "kerzner-uj-82346",
+    "storage_bucket": "kerzner-uj-82346.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:227744421324:android:ea42ef110e3a96118db969",
+        "mobilesdk_app_id": "1:33228726875:android:6839f9c67643ea0416557e",
         "android_client_info": {
           "package_name": "com.ujeat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "227744421324-m839fedmkv1u55eqgm12d0n2tjmbim88.apps.googleusercontent.com",
+          "client_id": "33228726875-ons5gsm2qfe0mnmb4io82okr2a9n45qb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDC81YKVyvDFDpgFpprSWAKYQnnDvrhz34"
+          "current_key": "AIzaSyCfZ0Bo2UQQrvSlY7R4hSXrbUrSXSH7QoM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "227744421324-m839fedmkv1u55eqgm12d0n2tjmbim88.apps.googleusercontent.com",
+              "client_id": "33228726875-ons5gsm2qfe0mnmb4io82okr2a9n45qb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

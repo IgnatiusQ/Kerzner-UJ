@@ -13,6 +13,8 @@ target 'UJeat' do
 
   pod 'react-native-voice', :path => '../node_modules/@react-native-voice/voice'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'UJeatTests' do
     inherit! :complete
     # Pods for testing
