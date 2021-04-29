@@ -12,6 +12,8 @@ import GetStarted from './screens/GetStarted.js';
 import Login from './screens/Login.js';
 import SignUp from './screens/SignUp.js';
 import Main from './screens/Main.js';
+import SearchField from './screens/components/SearchField.js';
+import TabBar from './screens/components/TabBar.js';
 //INSTALLED LIBRARIES:
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -35,7 +37,7 @@ function App(){
           <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
           <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
           <Stack.Screen name='Main' component={Main} options={{headerShown:false}}/>
-          <Stack.Screen name='VoiceNative' component={VoiceNative} options={{headerShown:false}}/>
+          <Stack.Screen name='SearchField' component={SearchField} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>

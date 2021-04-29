@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, Image, StyleSheet, KeyboardAvoidingView, ScrollView,TouchableOpacity, TextInput, Alert, LogBox, Platform, StatusBar } from 'react-native'
 //INSTALLED LIBRARIES:
+import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import PassMeter from "react-native-passmeter";
@@ -16,7 +17,12 @@ const SignUp = ({navigation}) => {
     
     //USER & DATABASE STATES
     const [initializing, setInitializing] = useState(true);
-    const [user, setUser] = useState();
+    const user = {
+        userName:"",
+        userPhone:"",
+        userEmail:"",
+        userPassword:"",
+    };
     
     //ERROR MESSAGE
     let errorMessage = "";
@@ -28,12 +34,12 @@ const SignUp = ({navigation}) => {
 
 
     //HANDLING USER STATE CHANGES
-    function onAuthStateChanged(user){
-        setUser(user);
-        if(initializing) {
-            setInitializing(false);
-        }
-    };
+    // function onAuthStateChanged(user){
+    //     setUser(user);
+    //     if(initializing) {
+    //         setInitializing(false);
+    //     }
+    // };
 
     //ALERT BOX ERRORS
     const formErrors = () =>{
@@ -74,6 +80,9 @@ const SignUp = ({navigation}) => {
                         if(!pattern.test(email)){
                             errorMessage = errorMessage+"\nPlease enter a valid email address";
                         }
+                        else{
+                            testFirebase();
+                        }
                     }
                     else{
                         errorMessage = errorMessage+"\nPlease enter a valid email address";
@@ -92,9 +101,51 @@ const SignUp = ({navigation}) => {
 
     useEffect(()=>{
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
-        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-        return subscriber;
+        // const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        // return subscriber;
     }, []);
+
+    const testFirebase = () =>{
+        // let ref = firestore().collection('userProfiles');
+        // ref.add({
+        //     nameData: name,
+        //     phoneData: phone,
+        //     emailData: email,
+        //     passwordData: password,
+        // }).then(() =>{
+        //     console.log("Data Added")
+        // }).catch((error) =>{
+        //     console.log(`${error}`)
+        //     loading:true
+        // });
+
+
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((response) => {
+                const uid = response.userEg.uid
+                const data = {
+                    id: uid,
+                    email,
+                    fullName,
+                };
+                const usersRef = firebase.firestore().collection('userProfiles')
+                usersRef
+                    .doc(uid)
+                    .set(data)
+                    .then(() => {
+                        navigation.navigate('SignUp', {userEg: data})
+                    })
+                    .catch((error) => {
+                        alert(error)
+                    });
+                })
+                .catch((error) => {
+                    alert(error)
+                });
+    }
+
 
     return (
         <KeyboardAvoidingView
@@ -134,6 +185,7 @@ const SignUp = ({navigation}) => {
                         textContentType='telephoneNumber'
                         keyboardType='phone-pad'
                         value={phone}
+                        maxLength={10}
                         onChangeText={(text)=>setPhone(text)}
                     />
                     <TextInput

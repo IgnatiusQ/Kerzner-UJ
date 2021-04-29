@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, StatusBar, TouchableOpacity, Dimensions} from 'react-native'
 import SignUp from './SignUp'
+//INSTALLED LIBRARIES
+import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const GetStarted = ({navigation}) => {
     return (
@@ -11,9 +13,11 @@ const GetStarted = ({navigation}) => {
                 networkActivityIndicatorVisible={true}
                 animated={true}
             />
-            <Image
+            <MaterialIcons
                 style={styles.logo}
-                source={require('../image_props/logo_orange.jpg')}
+                name='chef-hat'
+                size={130}
+                color='#FFFFFF'
             />
             <Text style={styles.slogan}>
                 Food for{"\n"}Everyone
@@ -42,10 +46,7 @@ const styles = StyleSheet.create({
     logo:{
         alignSelf:'flex-start',
         marginTop:30,
-        marginLeft:30,
-        height:120,
-        width:120,
-        borderRadius:60,
+        marginLeft:10,
     },
     slogan:{
         alignSelf:'flex-start',

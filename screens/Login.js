@@ -1,24 +1,20 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text,StyleSheet, TextInput, TouchableOpacity, StatusBar, Image, KeyboardAvoidingView } from 'react-native'
-import Main from './Main';
-import SignUp from './SignUp';
+import { View, Text,StyleSheet, TextInput, TouchableOpacity, StatusBar, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
 //INSTALLED PACKAGES:
 import PasswordInputText from 'react-native-hide-show-password-input';
-import { ScrollView } from 'react-native';
+
 
 const Login = ({navigation}) => {
-    //EMAIL & PASSWORD STATES
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    //SIGN IN BUTTON HANDLER
     const signInButton = () =>{
-        navigation.navigate(Main);
-    }
+        navigation.navigate('Main');
+    };
 
-    //SIGN UP BUTTON HANDLER
     const SignUpButton = () =>{
-        navigation.navigate(SignUp);
+        navigation.navigate('SignUp');
     };
 
 
