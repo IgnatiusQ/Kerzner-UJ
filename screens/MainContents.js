@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableHighlight, FlatList, StyleSheet, Image } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native'
 
 const MainContents = ({navigation}) => {
 
@@ -45,7 +45,7 @@ const MainContents = ({navigation}) => {
                             Categories
                     </Text>
 
-                    <TouchableHighlight
+                    <TouchableOpacity
                         style={styles.viewAllButton}
                         underlayColor='#FFFFFF'
                         onPress={showAllCats}    
@@ -53,7 +53,7 @@ const MainContents = ({navigation}) => {
                         <Text style={styles.viewAllText}>
                             View all
                         </Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
 
                 <FlatList
@@ -87,6 +87,8 @@ export default MainContents
 const styles = StyleSheet.create({
     mainContainer:{
         marginTop:10,
+        borderBottomWidth:0.5,
+        borderColor:'#F2651C'
     },
     catTextField:{
         flexDirection:'row',

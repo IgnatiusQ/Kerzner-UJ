@@ -70,10 +70,12 @@ const SignUp = ({navigation}) => {
 
             if(name.length<=3 | name.match(numberPattern)===true){
                 errorMessage = errorMessage+"\nInvalid name";
-            }else{
+            }
+            else{
                 if(phone.match(numberPattern)===false | phone.length<=9){
                     errorMessage = errorMessage+"\nInvalid phone number";
-                }else{
+                }
+                else{
                     if(typeof email !== "undefined"){
                         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
                         
@@ -81,7 +83,15 @@ const SignUp = ({navigation}) => {
                             errorMessage = errorMessage+"\nPlease enter a valid email address";
                         }
                         else{
-                            testFirebase();
+                            if(password !== confirmPassword){
+                                errorMessage = errorMessage+"\nThe entered passwords do not match";
+                                alert(errorMessage);
+                                console.log(errorMessage);
+                            }
+                            else if(password == confirmPassword){
+                                alert("Your account has been created successfully");
+                                navigation.navigate('Login');
+                            }
                         }
                     }
                     else{
@@ -101,6 +111,7 @@ const SignUp = ({navigation}) => {
 
     useEffect(()=>{
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
+        errorMessage="";
         // const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
         // return subscriber;
     }, []);
@@ -214,11 +225,17 @@ const SignUp = ({navigation}) => {
                         style={styles.InputBox}
                         placeholder="Confirm Password"
                         textContentType='password'
-                        keyboardType='visible-password'
+                        secureTextEntry={true}
                         maxLength={8}
                         value={confirmPassword}
                         onChangeText={(text)=>setConfirmPassword(text)}
                     />
+                    <Text style={styles.requireText}>
+                        Password should:{"\n"}
+                         - be between 6 - 8 characters long{"\n"}
+                         - contain at least one numerical value{"\n"}
+                         - contain at least 1 UPPER {"&"} 1 lower case characters.
+                    </Text>
                     <TouchableOpacity
                         style={styles.SignUpButton}
                         onPress={signUp}
@@ -269,6 +286,10 @@ const styles = StyleSheet.create({
         marginTop:5,
         marginBottom:5,
     },
+    requireText:{
+        color:'#abadb0',
+        fontSize:12,
+    },
     SignUpButton:{
         borderWidth:1,
         backgroundColor:"#F2651C",
@@ -277,7 +298,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         height:40,
         width:320,
-        marginTop:80,
+        marginTop:5,
     },
     SignUpButtonText:{
         fontFamily:"Inter",

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text,StyleSheet, TextInput, TouchableOpacity, StatusBar, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { View, Text,StyleSheet, TextInput, LogBox, TouchableOpacity, StatusBar, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
 //INSTALLED PACKAGES:
 import PasswordInputText from 'react-native-hide-show-password-input';
 
@@ -8,9 +8,31 @@ const Login = ({navigation}) => {
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    let errorMessage = "";
+
+    useEffect(()=>{
+        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
+        errorMessage="";
+    }, []);
 
     const signInButton = () =>{
-        navigation.navigate('Main');
+        if(email!=="" & password!==""){
+            if(typeof email !== "undefined"){
+                var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                
+                if(!pattern.test(email)){
+                    errorMessage = errorMessage+"\nPlease enter a valid email address";
+                    alert(errorMessage);
+                    console.log(errorMessage);
+                }
+                else{
+                    navigation.navigate('Main');
+                }
+            }
+        } 
+        else{
+            errorMessage = errorMessage+"\nPlease fill in the empty fields";
+        }
     };
 
     const SignUpButton = () =>{
