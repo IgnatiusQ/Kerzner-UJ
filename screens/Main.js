@@ -1,15 +1,29 @@
-import React, { useEffect, useState } from 'react';
+;import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View, Text, Image, StatusBar, Alert } from 'react-native';
 import SearchField from './components/SearchField';
 import MainAdvert from './MainAdvert';
 import MainContents from './MainContents';
-import * as Menu from './components/Menus';
+import MenuScreen from './MenuScreen';
+import * as MenuThumbs from './components/MenuThumbs';
+
+//IMPORTING MENUS FROM MENU FOLDER
+import Breakfasts from './components/menus/Breakfasts';
+import HotMeals from './components/menus/HotMeals';
+import Salads from './components/menus/Salads';
+import Sandwiches from './components/menus/Sandwiches';
+import SignaturePizzas from './components/menus/SignaturePizzas';
+import SpecialityBurgers from './components/menus/SpecialityBurgers';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 //INSTALLED LIBRARIES
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import { FlatList } from 'react-native';
 import { Component } from 'react';
 import { ListItem } from 'react-native-elements/dist/list/ListItem';
+
+const Stack = createStackNavigator();
 
 const Main = ({navigation}) => {
 
@@ -19,7 +33,6 @@ const Main = ({navigation}) => {
                 animated={true}
                 backgroundColor='#F2651C'
                 networkActivityIndicatorVisible={true}
-                animated={true}
             />
             <View>
                 <SearchField/>
@@ -32,10 +45,10 @@ const Main = ({navigation}) => {
                     <MainContents/>
                 </View>
 
-                <Menu.SpecialityBurgers_Thumb/>
-                <Menu.SignaturePizzas_Thumb/>
-                <Menu.Sandwitches_Thumb/>  
-                <Menu.Omelets_Thumb/>     
+                <MenuThumbs.SpecialityBurgers_Thumb/>
+                <MenuThumbs.SignaturePizzas_Thumb/>
+                <MenuThumbs.Sandwitches_Thumb/>  
+                <MenuThumbs.Omelets_Thumb/>     
             </ScrollView>
         </View>
     )

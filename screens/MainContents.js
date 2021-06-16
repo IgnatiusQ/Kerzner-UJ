@@ -65,15 +65,17 @@ const MainContents = ({navigation}) => {
                             <View
                                 style={styles.smallCatImageContainer}
                                 onPress={null}
-                            >
-                                <Image 
-                                    source={item.src}
-                                    key={item.key}
-                                    style={styles.smallCatImage}
-                                />
-                                <Text style={styles.catTitle}>
-                                    {item.title}
-                                </Text>
+                            >   
+                                <TouchableOpacity>
+                                    <Image 
+                                        source={item.src}
+                                        key={item.key}
+                                        style={styles.smallCatImage}
+                                    />
+                                    <Text style={styles.catTitle}>
+                                        {item.title}
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         )}
                     />

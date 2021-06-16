@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, Alert } from 'react-native';
+import Login from '../Login';
 //INSTALLED LIBRARIES
+import { useNavigation } from '@react-navigation/native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Voice from 'react-native-voice';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 const SearchField = ({navigation}) => {
+
+    const backNavigation = useNavigation();
 
     const [searchMenu, setSearchMenu] = useState("");
 
@@ -129,7 +133,9 @@ const SearchField = ({navigation}) => {
         <View style={styles.searchView}>
             <TouchableHighlight
                 style={styles.backButton}
-                onPress={goToLogin}
+                onPress={()=>{
+                    null}
+                }
             >
                 <Feather
                     style={styles.backIcon}
