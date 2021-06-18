@@ -18,6 +18,8 @@ import TabBar from './screens/components/TabBar.js';
 
 //IMPORTING MENUS FROM MENU FOLDER
 import Breakfasts from './screens/components/menus/Breakfasts';
+import Drinks from './screens/components/menus/Drinks';
+import Deserts from './screens/components/menus/Deserts';
 import HotMeals from './screens/components/menus/HotMeals';
 import Salads from './screens/components/menus/Salads';
 import Sandwiches from './screens/components/menus/Sandwiches';
@@ -51,7 +53,9 @@ function App(){
           <Stack.Screen name='MenuScreen' component={MenuScreen} options={{headerShown:false}}/>
           {/* MAIN SCREEN STACK */}
           {/* MENUS STACK */}
-          <Stack.Screen name='Breakfast' component={Breakfasts} options={{headerShown:false}}/>
+          <Stack.Screen name='Deserts' component={Deserts} options={{headerShown:false}}/>
+          <Stack.Screen name='Drinks' component={Drinks} options={{headerShown:false}}/>
+          <Stack.Screen name='Breakfasts' component={Breakfasts} options={{headerShown:false}}/>
           <Stack.Screen name='HotMeals' component={HotMeals} options={{headerShown:false}}/>
           <Stack.Screen name='Salads' component={Salads} options={{headerShown:false}}/>
           <Stack.Screen name='Sandwiches' component={Sandwiches} options={{headerShown:false}}/>

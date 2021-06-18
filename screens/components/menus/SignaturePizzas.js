@@ -14,7 +14,7 @@ const SignaturePizzas = () => {
                     source={require('../../../image_props/emmanuel-zua-LxlMjePM7rQ-unsplash.jpg')}
                 />
             </View>
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.menuContainer}>
                         <Text style={styles.menuName}>BBQ Chicken {"&"} Mushroom Pizza </Text>
                         <Text style={styles.menuIngredients}>A freshly made pizza made with mozzarella cheese, Tangy Tomato, BBQ Chicken, Mushroom {"&"} Peppers</Text>
@@ -46,6 +46,13 @@ const styles = StyleSheet.create({
         borderBottomColor:'#F2651C',
         borderBottomWidth:0.5,
     },
+    headField:{
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    cartButton:{
+        backgroundColor:'transparent',       
+    },
     menuTextHead:{
         fontSize:25,
         fontWeight:'bold',
@@ -57,6 +64,7 @@ const styles = StyleSheet.create({
     },
     menuContainer:{
         marginVertical:5,
+        marginHorizontal:10,
         alignContent:'center',
         backgroundColor:'#FFFFFF',
         borderWidth:0.5,
@@ -74,7 +82,6 @@ const styles = StyleSheet.create({
     },
     menuPrice:{
         marginVertical:2,
-        marginHorizontal:50,
         fontSize:20,
         color:'#000000',
         fontWeight:'bold',
@@ -93,5 +100,10 @@ const styles = StyleSheet.create({
         color:'#8a8a8a',
         marginBottom:5,
         marginHorizontal:5,
+    },
+    buyField:{
+        marginHorizontal:50,
+        flexDirection:'row',
+        justifyContent:'space-between',
     }
 })

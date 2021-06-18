@@ -3,11 +3,11 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { View, Text, StyleSheet, ImageBackground } from 'react-native'
 
-import Breakfast from './Menus/Breakfasts'
-import HotMeals from './Menus/HotMeals'
-import Salads from './Menus/Salads'
-import Sandwiches from './Menus/Sandwiches'
-import SignaturePizzas from './Menus/SignaturePizzas'
+import Breakfasts from './menus/Breakfasts'
+import HotMeals from './menus/HotMeals'
+import Salads from './menus/Salads'
+import Sandwiches from './menus/Sandwiches'
+import SignaturePizzas from './menus/SignaturePizzas'
 import SpecialityBurgers from './menus/SpecialityBurgers'
 
 

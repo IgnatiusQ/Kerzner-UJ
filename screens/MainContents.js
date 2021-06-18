@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/core'
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native'
 
-const MainContents = ({navigation}) => {
+const MainContents = () => {
+
+    const navigation = useNavigation();
 
     //CATEGORIES
     const [catHorizontal, setCatHorizontal] = useState([
@@ -9,32 +12,40 @@ const MainContents = ({navigation}) => {
             src : require('../image_props/whitney-wright-6G98hiCJETA-unsplash.jpg'),
             key:'catBreakfast',
             title:'Breakfast',
-            
+            value:'Breakfasts'
         },
         {
             src : require('../image_props/rirri-R4zSXgDZLEU-unsplash.jpg'),
             key:'catDrinks',
-            title:'Drinks'
+            title:'Drinks',
+            value:'Drinks'
         },
         {
             src : require('../image_props/monika-grabkowska-P1aohbiT-EY-unsplash.jpg'),
             key:'catDeserts',
-            title:'Deserts'
+            title:'Deserts',
+            value:'Deserts'
         },
         {
             src : require('../image_props/mgg-vitchakorn-Ul4sgxQMmHU-unsplash.jpg'),
             key:'catSalads',
-            title:'Salads'
+            title:'Salads',
+            value:'Salads'
         },   
         {
             src : require('../image_props/alex-munsell-Yr4n8O_3UPc-unsplash.jpg'),
             key:'catHot_Meals',
-            title:'Hot Meals'
+            title:'Hot Meals',
+            value:'HotMeals'
         }
     ]);
 
     const showAllCats = () =>{
         null
+    }
+
+    const toSelectedMenu = (selected) =>{
+        navigation.navigate(selected)
     }
 
     return (
@@ -64,9 +75,8 @@ const MainContents = ({navigation}) => {
                         renderItem={({ item })=>(
                             <View
                                 style={styles.smallCatImageContainer}
-                                onPress={null}
                             >   
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={()=>toSelectedMenu(item.value)}>
                                     <Image 
                                         source={item.src}
                                         key={item.key}

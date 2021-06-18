@@ -61,7 +61,7 @@ const SearchField = ({navigation}) => {
 
     //BACK ARROW HANDLER
     const goToLogin = () =>{
-        navigation.navigate('Login');
+        backNavigation.navigate(Login);
     }
 
     //SPEECH INPUT HANDLER
@@ -134,7 +134,7 @@ const SearchField = ({navigation}) => {
             <TouchableHighlight
                 style={styles.backButton}
                 onPress={()=>{
-                    null}
+                    goToLogin}
                 }
             >
                 <Feather
