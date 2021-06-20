@@ -1,9 +1,42 @@
 import React from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Sandwiches = () => {
     // const Chicken_Haloumi_Quesadilla = () =>{
+        const menuDetails = ({
+            menu : "",
+            price : "",
+            key : "",
+        })
+    
+        const showCart = async () =>{
+            try{
+                const jsonMenuValue01 = await AsyncStorage.getItem('Sandwiches01');
+                const jsonMenuValue02 = await AsyncStorage.getItem('Sandwiches02');
+                const jsonMenuValue03 = await AsyncStorage.getItem('Sandwiches03')
+                alert(jsonMenuValue01 + "\n" + jsonMenuValue02 + "\n" + jsonMenuValue03)
+            }catch(err){
+                console.log(err)
+            }        
+        }
+    
+        const AddToCart = async (menuDetails, menuVar, priceVar, keyVar) =>{
+            menuDetails.menu=menuVar;
+            menuDetails.price=priceVar;
+            menuDetails.key=keyVar;
+            
+            try{
+                const jsonMenuValue = JSON.stringify(menuDetails);
+                await AsyncStorage.setItem(keyVar, jsonMenuValue)
+    
+                console.log("Sandwich added to Cart!")
+            }catch(err){
+                console.log(err)
+            }
+        }
+
         return (
             <View style={styles.container}>
                 <View style={styles.headField}>
@@ -12,9 +45,7 @@ const Sandwiches = () => {
                     </Text>
                     <TouchableOpacity
                         style={styles.cartButton}
-                        onPress={()=>{
-                            null}
-                        }
+                        onPress={showCart}
                     >
                             <IconFontAwesome
                                 style={styles.cartIcon}
@@ -42,7 +73,7 @@ const Sandwiches = () => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Chicken & Haloumi Quesadilla", "R 70.00", "Sandwiches01")}
                                 }
                             >
                                 <IconFontAwesome
@@ -67,7 +98,7 @@ const Sandwiches = () => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Roasted Root Vegetable Tortilla Wrap", "R 65.00", "Sandwiches02")}
                                 }
                             >
                                 <IconFontAwesome
@@ -92,7 +123,7 @@ const Sandwiches = () => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Slow Braised Chicken Tramazzini", "R 72.00", "Sandwiches03")}
                                 }
                             >
                                 <IconFontAwesome

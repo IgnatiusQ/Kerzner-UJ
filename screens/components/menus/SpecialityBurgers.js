@@ -1,9 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const SpecialityBurgers = () => {
     // const STH_Beef_Burger = () =>{
+    const menuDetails = ({
+        menu : "",
+        price : "",
+        key : "",
+    })
+
+    const showCart = async () =>{
+        try{
+            const jsonMenuValue01 = await AsyncStorage.getItem('SpecialityBurgers01');
+            const jsonMenuValue02 = await AsyncStorage.getItem('SpecialityBurgers02');
+            const jsonMenuValue03 = await AsyncStorage.getItem('SpecialityBurgers03')
+            alert(jsonMenuValue01 + "\n" + jsonMenuValue02 + "\n" + jsonMenuValue03)
+        }catch(err){
+            console.log(err)
+        }        
+    }
+
+    const AddToCart = async (menuDetails, menuVar, priceVar, keyVar) =>{
+        menuDetails.menu=menuVar;
+        menuDetails.price=priceVar;
+        menuDetails.key=keyVar;
+        
+        try{
+            const jsonMenuValue = JSON.stringify(menuDetails);
+            await AsyncStorage.setItem(keyVar, jsonMenuValue)
+
+            console.log("Speciality Burger added to Cart!")
+        }catch(err){
+            console.log(err)
+        }
+    }
+
         return (
             <View style={styles.container}>
                 <View style={styles.headField}>
@@ -12,9 +45,7 @@ const SpecialityBurgers = () => {
                     </Text>
                     <TouchableOpacity
                         style={styles.cartButton}
-                        onPress={()=>{
-                            null}
-                        }
+                        onPress={showCart}
                     >
                             <IconFontAwesome
                                 style={styles.cartIcon}
@@ -43,7 +74,7 @@ const SpecialityBurgers = () => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "STH Beef Burger", "R 105.00", "SpecialityBurgers01")}
                                 }
                             >
                                 <IconFontAwesome
@@ -68,7 +99,7 @@ const SpecialityBurgers = () => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "STH Chicken Burger", "R 85.00", "SpecialityBurgers02")}
                                 }
                             >
                                 <IconFontAwesome
@@ -93,7 +124,7 @@ const SpecialityBurgers = () => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "STH Falafel Burger", "R 75.00", "SpecialityBurgers03")}
                                 }
                             >
                                 <IconFontAwesome

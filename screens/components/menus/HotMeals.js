@@ -1,9 +1,41 @@
 import React from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const HotMeals = () => {
     // const Creamed_Beef_Pasta = () =>{
+        const menuDetails = ({
+            menu : "",
+            price : "",
+            key : "",
+        })
+    
+        const showCart = async () =>{
+            try{
+                const jsonMenuValue01 = await AsyncStorage.getItem('HotMeals01');
+                const jsonMenuValue02 = await AsyncStorage.getItem('HotMeals02');
+                alert(jsonMenuValue01 + "\n" + jsonMenuValue02)
+            }catch(err){
+                console.log(err)
+            }        
+        }
+    
+        const AddToCart = async (menuDetails, menuVar, priceVar, keyVar) =>{
+            menuDetails.menu=menuVar;
+            menuDetails.price=priceVar;
+            menuDetails.key=keyVar;
+            
+            try{
+                const jsonMenuValue = JSON.stringify(menuDetails);
+                await AsyncStorage.setItem(keyVar, jsonMenuValue)
+    
+                console.log("Hot Meal added to Cart!")
+            }catch(err){
+                console.log(err)
+            }
+        }
+
         return (
             <View style={styles.container}>
                 <View style={styles.headField}>
@@ -12,9 +44,7 @@ const HotMeals = () => {
                     </Text>
                     <TouchableOpacity
                         style={styles.cartButton}
-                        onPress={()=>{
-                            null}
-                        }
+                        onPress={showCart}
                     >
                             <IconFontAwesome
                                 style={styles.cartIcon}
@@ -34,7 +64,7 @@ const HotMeals = () => {
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.menuContainer}>
-                        <Text style={styles.menuName}>Creamed Beef Pasta </Text>
+                        <Text style={styles.menuName}>Creamed Beef Pasta</Text>
                         <Text style={styles.menuIngredients}>Layered Beef with Provençale style sauce, cream {"&"} Pecorino Cheese </Text>
                         
                         <View style={styles.buyField}>
@@ -42,7 +72,7 @@ const HotMeals = () => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Creamed Beef Pasta", "R 70.00", "HotMeals01")}
                                 }
                             >
                                 <IconFontAwesome
@@ -67,7 +97,7 @@ const HotMeals = () => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Fish And Chips", "R 70.00", "HotMeals02")}
                                 }
                             >
                                 <IconFontAwesome

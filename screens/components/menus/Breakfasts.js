@@ -1,9 +1,44 @@
 import React from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const Breakfasts = (navigation) => {
     // const Waterford_Breakfast = () =>{
+        const menuDetails = ({
+            menu : "",
+            price : "",
+            key : "",
+        })
+    
+        const showCart = async () =>{
+            try{
+                const jsonMenuValue01 = await AsyncStorage.getItem('Breakfasts01');
+                const jsonMenuValue02 = await AsyncStorage.getItem('Breakfasts02');
+                const jsonMenuValue03 = await AsyncStorage.getItem('Breakfasts03');
+                const jsonMenuValue04 = await AsyncStorage.getItem('Breakfasts04');
+                const jsonMenuValue05 = await AsyncStorage.getItem('Breakfasts05');
+                alert(jsonMenuValue01 + "\n" + jsonMenuValue02 + "\n" + jsonMenuValue03 + "\n" + jsonMenuValue04 + "\n" + jsonMenuValue05)
+            }catch(err){
+                console.log(err)
+            }        
+        }
+    
+        const AddToCart = async (menuDetails, menuVar, priceVar, keyVar) =>{
+            menuDetails.menu=menuVar;
+            menuDetails.price=priceVar;
+            menuDetails.key=keyVar;
+            
+            try{
+                const jsonMenuValue = JSON.stringify(menuDetails);
+                await AsyncStorage.setItem(keyVar, jsonMenuValue)
+    
+                console.log("Breakfast added to Cart!")
+            }catch(err){
+                console.log(err)
+            }
+        }
+
         return (
             <View style={styles.container}>
                 <View style={styles.headField}>
@@ -12,9 +47,7 @@ export const Breakfasts = (navigation) => {
                     </Text>
                     <TouchableOpacity
                         style={styles.cartButton}
-                        onPress={()=>{
-                            null}
-                        }
+                        onPress={showCart}
                     >
                             <IconFontAwesome
                                 style={styles.cartIcon}
@@ -43,7 +76,7 @@ export const Breakfasts = (navigation) => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Waterford Breakfast", "R 85.00", "Breakfasts01")}
                                 }
                             >
                                 <IconFontAwesome
@@ -67,7 +100,7 @@ export const Breakfasts = (navigation) => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Beans With Hashbrown", "R 65.00", "Breakfasts02")}
                                 }
                             >
                                 <IconFontAwesome
@@ -92,7 +125,7 @@ export const Breakfasts = (navigation) => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Homemade Waffle", "R 65.00", "Breakfasts03")}
                                 }
                             >
                                 <IconFontAwesome
@@ -119,7 +152,7 @@ export const Breakfasts = (navigation) => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Breakfast Fruit Bowl", "R 72.00", "Breakfasts04")}
                                 }
                             >
                                 <IconFontAwesome
@@ -145,7 +178,7 @@ export const Breakfasts = (navigation) => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "STH Beef Oats", "R 55.00", "Breakfasts05")}
                                 }
                             >
                                 <IconFontAwesome

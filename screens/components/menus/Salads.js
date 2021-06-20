@@ -1,9 +1,42 @@
 import React from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Salads = (navigation) => {
     // const Garden_Salad  = () =>{
+        const menuDetails = ({
+            menu : "",
+            price : "",
+            key : "",
+        })
+    
+        const showCart = async () =>{
+            try{
+                const jsonMenuValue01 = await AsyncStorage.getItem('Salads01');
+                const jsonMenuValue02 = await AsyncStorage.getItem('Salads02');
+                const jsonMenuValue03 = await AsyncStorage.getItem('Salads03')
+                alert(jsonMenuValue01 + "\n" + jsonMenuValue02 + "\n" + jsonMenuValue03)
+            }catch(err){
+                console.log(err)
+            }        
+        }
+    
+        const AddToCart = async (menuDetails, menuVar, priceVar, keyVar) =>{
+            menuDetails.menu=menuVar;
+            menuDetails.price=priceVar;
+            menuDetails.key=keyVar;
+            
+            try{
+                const jsonMenuValue = JSON.stringify(menuDetails);
+                await AsyncStorage.setItem(keyVar, jsonMenuValue)
+    
+                console.log("Salad added to Cart!")
+            }catch(err){
+                console.log(err)
+            }
+        }
+
         return (
             <View style={styles.container}>
                <View style={styles.headField}>
@@ -12,9 +45,7 @@ const Salads = (navigation) => {
                     </Text>
                     <TouchableOpacity
                         style={styles.cartButton}
-                        onPress={()=>{
-                            null}
-                        }
+                        onPress={showCart}
                     >
                             <IconFontAwesome
                                 style={styles.cartIcon}
@@ -48,7 +79,7 @@ const Salads = (navigation) => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Garden Salad", "R 65.00", "Salads01")}
                                 }
                             >
                                 <IconFontAwesome
@@ -72,7 +103,7 @@ const Salads = (navigation) => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Pasta Salad", "R 70.00", "Salads02")}
                                 }
                             >
                                 <IconFontAwesome
@@ -96,7 +127,7 @@ const Salads = (navigation) => {
                             <TouchableOpacity
                                 style={styles.BuyCartButton}
                                 onPress={()=>{
-                                    null}
+                                    AddToCart(menuDetails, "Haloumi & Peppadew Salad", "R 90.00", "Salads03")}
                                 }
                             >
                                 <IconFontAwesome
