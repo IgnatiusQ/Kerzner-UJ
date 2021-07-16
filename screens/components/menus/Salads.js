@@ -1,35 +1,41 @@
-import React from 'react'
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/core'
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const Salads = (navigation) => {
+const Salads = () => {
     // const Garden_Salad  = () =>{
-        const menuDetails = ({
-            menu : "",
-            price : "",
-            key : "",
-        })
-    
-        const showCart = async () =>{
-            try{
-                const jsonMenuValue01 = await AsyncStorage.getItem('Salads01');
-                const jsonMenuValue02 = await AsyncStorage.getItem('Salads02');
-                const jsonMenuValue03 = await AsyncStorage.getItem('Salads03')
-                alert(jsonMenuValue01 + "\n" + jsonMenuValue02 + "\n" + jsonMenuValue03)
-            }catch(err){
-                console.log(err)
-            }        
-        }
-    
-        const AddToCart = async (menuDetails, menuVar, priceVar, keyVar) =>{
-            menuDetails.menu=menuVar;
-            menuDetails.price=priceVar;
-            menuDetails.key=keyVar;
-            
-            try{
-                const jsonMenuValue = JSON.stringify(menuDetails);
-                await AsyncStorage.setItem(keyVar, jsonMenuValue)
+    const navigation = useNavigation();
+
+    const [quantityUpdate, setQuantityUpdate] = useState(1);
+
+    const menuDetails = ({
+        menu : "",
+        price : "",
+        quantity: "",
+        key : "",
+    })
+
+    const updateQuantity = (number) =>{
+        setQuantityUpdate(number)
+    }
+
+    const ToCart = () =>{
+        navigation.navigate('Cart');
+    }
+
+    const AddToCart = async (menuDetails, menuVar, priceVar, quantityUpdateVar, keyVar) =>{
+        menuDetails.menu=menuVar;
+        menuDetails.price=priceVar;
+        menuDetails.quantity=quantityUpdateVar;
+        menuDetails.key=keyVar;
+
+        alert(menuDetails.quantity)
+        
+        try{
+            const jsonMenuValue = JSON.stringify(menuDetails);
+            await AsyncStorage.setItem(keyVar, jsonMenuValue)
     
                 console.log("Salad added to Cart!")
             }catch(err){
@@ -45,7 +51,7 @@ const Salads = (navigation) => {
                     </Text>
                     <TouchableOpacity
                         style={styles.cartButton}
-                        onPress={showCart}
+                        onPress={ToCart}
                     >
                             <IconFontAwesome
                                 style={styles.cartIcon}
@@ -76,21 +82,36 @@ const Salads = (navigation) => {
                         
                         <View style={styles.buyField}>
                             <Text style={styles.menuPrice}>R 65.00</Text>
-                            <TouchableOpacity
-                                style={styles.BuyCartButton}
-                                onPress={()=>{
-                                    AddToCart(menuDetails, "Garden Salad", "R 65.00", "Salads01")}
-                                }
-                            >
-                                <IconFontAwesome
-                                    style={styles.AddCartIcon}
-                                    name='cart-plus'
-                                    size={30}
-                                    color='#F2651C'
-                                    selectionColor='#FFFFFF'
-                                    accessibilityIgnoresInvertColors={true}
+                            <View style={styles.quantityCartContainer}>
+                                <Text style={styles.multiply}>x</Text>
+                                <TextInput
+                                    style={styles.quantity}
+                                    maxLength={2}
+                                    editable={true}
+                                    defaultValue="1"
+                                    placeholder="1"
+                                    textAlign="center"
+                                    keyboardType="numeric"
+                                    multiline={false}
+                                    onChangeText={number=>(updateQuantity(number))}
                                 />
-                            </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={styles.BuyCartButton}
+                                    onPress={()=>{
+                                        AddToCart(menuDetails, "Garden Salad", "R 65.00", quantityUpdate, "Salads01")}
+                                    }
+                                >
+                                    <IconFontAwesome
+                                        style={styles.AddCartIcon}
+                                        name='cart-plus'
+                                        size={30}
+                                        color='#F2651C'
+                                        selectionColor='#FFFFFF'
+                                        accessibilityIgnoresInvertColors={true}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
 
@@ -100,21 +121,36 @@ const Salads = (navigation) => {
                         
                         <View style={styles.buyField}>
                             <Text style={styles.menuPrice}>R 70.00</Text>
-                            <TouchableOpacity
-                                style={styles.BuyCartButton}
-                                onPress={()=>{
-                                    AddToCart(menuDetails, "Pasta Salad", "R 70.00", "Salads02")}
-                                }
-                            >
-                                <IconFontAwesome
-                                    style={styles.AddCartIcon}
-                                    name='cart-plus'
-                                    size={30}
-                                    color='#F2651C'
-                                    selectionColor='#FFFFFF'
-                                    accessibilityIgnoresInvertColors={true}
+                            <View style={styles.quantityCartContainer}>
+                                <Text style={styles.multiply}>x</Text>
+                                <TextInput
+                                    style={styles.quantity}
+                                    maxLength={2}
+                                    editable={true}
+                                    defaultValue="1"
+                                    placeholder="1"
+                                    textAlign="center"
+                                    keyboardType="numeric"
+                                    multiline={false}
+                                    onChangeText={number=>(updateQuantity(number))}
                                 />
-                            </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={styles.BuyCartButton}
+                                    onPress={()=>{
+                                        AddToCart(menuDetails, "Pasta Salad", "R 70.00", quantityUpdate, "Salads02")}
+                                    }
+                                >
+                                    <IconFontAwesome
+                                        style={styles.AddCartIcon}
+                                        name='cart-plus'
+                                        size={30}
+                                        color='#F2651C'
+                                        selectionColor='#FFFFFF'
+                                        accessibilityIgnoresInvertColors={true}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
 
@@ -124,21 +160,36 @@ const Salads = (navigation) => {
                         
                         <View style={styles.buyField}>
                             <Text style={styles.menuPrice}>R 90.00</Text>
-                            <TouchableOpacity
-                                style={styles.BuyCartButton}
-                                onPress={()=>{
-                                    AddToCart(menuDetails, "Haloumi & Peppadew Salad", "R 90.00", "Salads03")}
-                                }
-                            >
-                                <IconFontAwesome
-                                    style={styles.AddCartIcon}
-                                    name='cart-plus'
-                                    size={30}
-                                    color='#F2651C'
-                                    selectionColor='#FFFFFF'
-                                    accessibilityIgnoresInvertColors={true}
+                            <View style={styles.quantityCartContainer}>
+                                <Text style={styles.multiply}>x</Text>
+                                <TextInput
+                                    style={styles.quantity}
+                                    maxLength={2}
+                                    editable={true}
+                                    defaultValue="1"
+                                    placeholder="1"
+                                    textAlign="center"
+                                    keyboardType="numeric"
+                                    multiline={false}
+                                    onChangeText={number=>(updateQuantity(number))}
                                 />
-                            </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={styles.BuyCartButton}
+                                    onPress={()=>{
+                                        AddToCart(menuDetails, "Haloumi & Peppadew Salad", "R 90.00", quantityUpdate, "Salads03")}
+                                    }
+                                >
+                                    <IconFontAwesome
+                                        style={styles.AddCartIcon}
+                                        name='cart-plus'
+                                        size={30}
+                                        color='#F2651C'
+                                        selectionColor='#FFFFFF'
+                                        accessibilityIgnoresInvertColors={true}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                 </ScrollView>
@@ -158,6 +209,23 @@ const styles = StyleSheet.create({
     headField:{
         flexDirection:'row',
         justifyContent:'space-between'
+    },
+    multiply:{
+        paddingTop:5,
+    },
+    quantityCartContainer:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        marginBottom:5,
+    },
+    quantity:{
+        borderColor:'#F2651C',
+        borderWidth:2,
+        borderRadius:5,
+        height:35,
+        marginHorizontal:5,
+        fontWeight:"bold",
+        backgroundColor:"#ededed"
     },
     cartButton:{
         backgroundColor:'transparent',       

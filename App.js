@@ -13,6 +13,7 @@ import Login from './screens/Login.js';
 import SignUp from './screens/SignUp.js';
 import Main from './screens/Main.js';
 import MenuScreen from './screens/MenuScreen';
+import Cart from './screens/Cart.js';
 import SearchField from './screens/components/SearchField.js';
 import TabBar from './screens/components/TabBar.js';
 
@@ -51,6 +52,7 @@ function App(){
           <Stack.Screen name='SearchField' component={SearchField} options={{headerShown:false}}/>
           <Stack.Screen name='Main' component={Main} options={{headerShown:false}}/>
           <Stack.Screen name='MenuScreen' component={MenuScreen} options={{headerShown:false}}/>
+          <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
           {/* MAIN SCREEN STACK */}
           {/* MENUS STACK */}
           <Stack.Screen name='Deserts' component={Deserts} options={{headerShown:false}}/>

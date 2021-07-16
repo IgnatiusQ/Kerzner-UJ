@@ -129,6 +129,13 @@ const SearchField = ({navigation}) => {
         setPitch(e.value);
     };
 
+    const searchForMenu = (text) =>{
+        setSearchMenu(text);
+        if(searchMenu !== ""){
+            console.log(searchMenu)
+        }
+    }
+
     return(
         <View style={styles.searchView}>
             <TouchableHighlight
@@ -153,7 +160,7 @@ const SearchField = ({navigation}) => {
                     placeholder='search menu'
                     keyboardType='default'
                     // value={searchMenu}
-                    onChangeText={(text)=>setSearchMenu(text)}
+                    onChangeText={(text)=>searchForMenu(text)}
                 >
                     {results[0]}
                 </TextInput>
