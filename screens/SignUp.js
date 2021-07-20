@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, Image, StyleSheet, KeyboardAvoidingView, ScrollView,TouchableOpacity, TextInput, Alert, LogBox, Platform, StatusBar } from 'react-native'
+
 //INSTALLED LIBRARIES:
 import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
@@ -17,6 +18,7 @@ const SignUp = ({navigation}) => {
     
     //USER & DATABASE STATES
     const [initializing, setInitializing] = useState(true);
+
     const user = {
         userName:"",
         userPhone:"",
@@ -28,7 +30,7 @@ const SignUp = ({navigation}) => {
     let errorMessage = "";
     
     //PASSWORD  STRENGTH METER
-    const MAX_LEN = 8,
+    const MAX_LEN = 16,
         MIN_LEN = 6,
         PASS_LABELS = ["Too Short", "Weak", "Good", "Strong", "Strong"];
 
@@ -66,9 +68,10 @@ const SignUp = ({navigation}) => {
     //SIGN UP BOTTON EVENT-HANDLER
     const signUp = async =>{
         if(name!=="" & phone!=="" & email!=="" & password!=="" & confirmPassword!==""){
+
             let numberPattern = /^08[0-9]{9,}$/;
 
-            if(name.length<=3 | name.match(numberPattern)===true){
+            if(name.length<=2 | name.match(numberPattern)===true){
                 errorMessage = errorMessage+"\nInvalid name";
             }
             else{
@@ -77,6 +80,7 @@ const SignUp = ({navigation}) => {
                 }
                 else{
                     if(typeof email !== "undefined"){
+                        
                         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
                         
                         if(!pattern.test(email)){
@@ -226,13 +230,13 @@ const SignUp = ({navigation}) => {
                         placeholder="Confirm Password"
                         textContentType='password'
                         secureTextEntry={true}
-                        maxLength={8}
+                        maxLength={16}
                         value={confirmPassword}
                         onChangeText={(text)=>setConfirmPassword(text)}
                     />
                     <Text style={styles.requireText}>
                         Password should:{"\n"}
-                         - be between 6 - 8 characters long{"\n"}
+                         - be between 6 - 16 characters long{"\n"}
                          - contain at least one numerical value{"\n"}
                          - contain at least 1 UPPER {"&"} 1 lower case characters.
                     </Text>

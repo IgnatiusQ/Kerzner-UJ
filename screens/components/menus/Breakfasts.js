@@ -10,12 +10,12 @@ export const Breakfasts = () => {
 
     const [quantityUpdate, setQuantityUpdate] = useState(1);
 
-    const menuDetails = ({
+    const menuDetails = {
         menu : "",
         price : "",
-        quantity: "",
+        quantity : "",
         key : "",
-    })
+    }
 
     const updateQuantity = (number) =>{
         setQuantityUpdate(number)
@@ -31,13 +31,13 @@ export const Breakfasts = () => {
         menuDetails.quantity=quantityUpdateVar;
         menuDetails.key=keyVar;
 
-        alert(menuDetails.quantity)
+        // alert(menuDetails.quantity)
         
-        try{
-            const jsonMenuValue = JSON.stringify(menuDetails);
-            await AsyncStorage.setItem(keyVar, jsonMenuValue)
-    
+            try{
+                await AsyncStorage.setItem(keyVar, JSON.stringify(menuDetails))
+            
                 console.log("Breakfast added to Cart!")
+                
             }catch(err){
                 console.log(err)
             }
@@ -63,12 +63,14 @@ export const Breakfasts = () => {
                             />
                     </TouchableOpacity>
                 </View>
+
                 <View style={styles.imageContainer}>
                     <Image
                         style={styles.image}
                         source={require('../../../image_props/nathan-dumlao-2VSTCRx8ccY-unsplash.jpg')}
                     />
                 </View>
+
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.menuContainer}>
                         <Text style={styles.menuName}>Waterford Breakfast</Text>
@@ -77,14 +79,16 @@ export const Breakfasts = () => {
                         
                         <View style={styles.buyField}>
                             <Text style={styles.menuPrice}>R 85.00</Text>
+                            
                             <View style={styles.quantityCartContainer}>
                                 <Text style={styles.multiply}>x</Text>
+                                
                                 <TextInput
                                     style={styles.quantity}
                                     maxLength={2}
                                     editable={true}
                                     defaultValue="1"
-                                    placeholder="1"
+                                    placeholder="0"
                                     textAlign="center"
                                     keyboardType="numeric"
                                     multiline={false}
@@ -291,6 +295,7 @@ const styles = StyleSheet.create({
     },
     multiply:{
         paddingTop:5,
+        color:'#5e5e5e',
     },
     quantityCartContainer:{
         flexDirection:"row",

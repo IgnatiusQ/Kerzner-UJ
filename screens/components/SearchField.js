@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Voice from 'react-native-voice';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 
 const SearchField = ({navigation}) => {
 
@@ -138,7 +137,7 @@ const SearchField = ({navigation}) => {
 
     return(
         <View style={styles.searchView}>
-            <TouchableHighlight
+            {/* <TouchableHighlight
                 style={styles.backButton}
                 onPress={()=>{
                     goToLogin}
@@ -152,7 +151,8 @@ const SearchField = ({navigation}) => {
                     selectionColor='#F2651C'
                     accessibilityIgnoresInvertColors={true}
                 />
-            </TouchableHighlight>
+            </TouchableHighlight> */}
+
             <View style={styles.searchContainer}>
                 <TextInput
                     style={styles.searchField}
@@ -183,19 +183,22 @@ const styles = StyleSheet.create({
         alignContent:'center',
         alignItems:'center',
         flexDirection:'row',
-        justifyContent:'flex-start',
+        justifyContent:'center',
         height:50
     },
     backButton:{
         backgroundColor:'transparent'
     },
-    backIcon:{
-        marginHorizontal:5,
-        color:'#FFFFFF', 
-    },
+
+    // backIcon:{
+    //     marginHorizontal:5,
+    //     color:'#FFFFFF', 
+    // },
+
     searchContainer:{
         flexDirection:'row',
-        justifyContent:'flex-start',
+        justifyContent:'center',
+        alignSelf:'center',
     },
     micIcon:{
         top:5,
@@ -203,6 +206,7 @@ const styles = StyleSheet.create({
     },
     searchField:{
         backgroundColor:'#F6F6F6',
+        marginLeft:15,
         width:300,
         borderWidth:2,
         fontSize:15,

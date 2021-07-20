@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, Image, ScrollView, StyleSheet, Linking } from 'react-native'
 
 //INSTALLED LIBRARIES
 import { SliderBox } from "react-native-image-slider-box";
@@ -13,8 +13,8 @@ const MainAdvert = ({navigation}) => {
     ];
 
     const advertHandler = () =>{
-        null
-    }
+        Linking.openURL('https://thekerzneratuj.com/');
+    };
 
     return (
         <View style={styles.advertField}>
@@ -26,7 +26,7 @@ const MainAdvert = ({navigation}) => {
                 autoplay={true}
                 autoplayInterval={3000}
                 circleLoop={true}
-                onCurrentImagePressed={index => advertHandler}
+                onCurrentImagePressed={advertHandler}
             />
         </View>
     )
@@ -38,12 +38,13 @@ const styles = StyleSheet.create({
     advertField:{
         marginLeft:10,
         marginTop:10,
+        backgroundColor:'transparent',
         backgroundColor:'#FFFFFF'
     },
     advertPicture:{
         width:340,
         height:120,
-        borderColor:'#000000',
+        borderColor:'transparent',
         borderWidth:1,
         backgroundColor:'#FFFFFF'
     }

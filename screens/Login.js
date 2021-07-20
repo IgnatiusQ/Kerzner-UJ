@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text,StyleSheet, TextInput, LogBox, TouchableOpacity, StatusBar, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { View, Text,StyleSheet, TextInput, LogBox, Alert, TouchableOpacity, StatusBar, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
 //INSTALLED PACKAGES:
 import PasswordInputText from 'react-native-hide-show-password-input';
 
@@ -14,6 +14,23 @@ const Login = ({navigation}) => {
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
         errorMessage="";
     }, []);
+
+    const formErrors = () =>{
+        if(errorMessage!==""){
+            Alert.alert(
+                "Log In",
+                errorMessage,
+                [   
+                    {
+                        text: "Okay",
+                        onPress: () => errorMessage="",
+                        style: 'cancel'
+                    },
+                ]
+            )
+        }
+    }
+
 
     const signInButton = () =>{
         if(email!=="" & password!==""){
@@ -31,7 +48,8 @@ const Login = ({navigation}) => {
             }
         } 
         else{
-            errorMessage = errorMessage+"\nPlease fill in the empty fields";
+            errorMessage = errorMessage+"\nPlease fill in the empty field(s)";
+            formErrors();
         }
     };
 
@@ -58,13 +76,16 @@ const Login = ({navigation}) => {
                         Log In
                     </Text>
                 </View>
+
                 <Text style={styles.KerznerHeadText}>
                     TheKerzner@UJ
                 </Text>
+
                 <Image
                     style={styles.UjImage}
                     source={require('../image_props/logo_white.jpg')}
                 />
+
                 <TextInput
                     style={styles.InputBoxEmail}
                     placeholder="Email"
@@ -73,11 +94,13 @@ const Login = ({navigation}) => {
                     value={email}
                     onChangeText={(email)=>setEmail(email)}
                 />
+
                 <PasswordInputText
                     style={styles.InputBoxPassword}
                     value={password}
                     onChangeText={(password)=>setPassword(password)}
                 />
+
                 <TouchableOpacity
                     style={styles.LogSignButton}
                     onPress={signInButton}    
@@ -86,6 +109,7 @@ const Login = ({navigation}) => {
                         Log In
                     </Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity
                     style={styles.LogSignButton}
                     onPress={SignUpButton}
@@ -94,11 +118,13 @@ const Login = ({navigation}) => {
                         Sign Up
                     </Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity style={styles.ForgotPassButton}>
                     <Text style={styles.ForgotPassText}>
                         Forgot Password?
                     </Text>
                 </TouchableOpacity>
+
             </ScrollView>
         </KeyboardAvoidingView>
     )
