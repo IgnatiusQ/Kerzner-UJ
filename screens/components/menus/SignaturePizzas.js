@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import {FontAwesome} from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const SignaturePizzas = () => {
@@ -53,7 +53,7 @@ const SignaturePizzas = () => {
                         style={styles.cartButton}
                         onPress={ToCart}
                     >
-                            <IconFontAwesome
+                            <FontAwesome
                                 style={styles.cartIcon}
                                 name='shopping-cart'
                                 size={40}
@@ -96,7 +96,7 @@ const SignaturePizzas = () => {
                                         AddToCart(menuDetails, "BBQ Chicken & Mushroom Pizza", "R 92.00", quantityUpdate, "Pizzas01")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -135,7 +135,7 @@ const SignaturePizzas = () => {
                                         AddToCart(menuDetails, "Four Seasons Pizza", "R 78.00", quantityUpdate, "Pizzas02")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -174,7 +174,7 @@ const SignaturePizzas = () => {
                                         AddToCart(menuDetails, "Meat Lovers Delight", "R 105.00", quantityUpdate, "Pizzas03")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { View, Text,StyleSheet, TextInput, LogBox, Alert, TouchableOpacity, StatusBar, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
 //INSTALLED PACKAGES:
 import PasswordInputText from 'react-native-hide-show-password-input';
-
+import * as firebase  from 'firebase';
 
 const Login = ({navigation}) => {
     
@@ -14,6 +14,8 @@ const Login = ({navigation}) => {
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
         errorMessage="";
     }, []);
+
+
 
     const formErrors = () =>{
         if(errorMessage!==""){
@@ -43,7 +45,7 @@ const Login = ({navigation}) => {
                     console.log(errorMessage);
                 }
                 else{
-                    navigation.navigate('Main');
+                    handleLogIn();
                 }
             }
         } 
@@ -57,6 +59,16 @@ const Login = ({navigation}) => {
         navigation.navigate('SignUp');
     };
 
+    const handleLogIn = () =>{
+        firebase.default
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() =>
+                navigation.navigate('Main'),
+                console.log("email : ", email),
+            )
+            .catch(err => alert(err));
+    };
 
     return (
         <KeyboardAvoidingView
@@ -193,7 +205,6 @@ const styles = StyleSheet.create({
         marginTop:10,
     },
     LogSignText:{
-        fontFamily:"Inter",
         fontWeight:"500",
         color: "#FFFFFF",
         marginTop:10,
@@ -205,7 +216,6 @@ const styles = StyleSheet.create({
     ForgotPassText:{
         color:"#F2651C",
         fontSize:16,
-        fontFamily:"Inter",
         fontWeight:"600",
         marginTop:10,
     }

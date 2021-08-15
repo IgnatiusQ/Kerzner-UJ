@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import {FontAwesome} from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const Breakfasts = () => {
@@ -15,15 +15,18 @@ export const Breakfasts = () => {
         price : "",
         quantity : "",
         key : "",
-    }
+    };
+
+    const [ priceHolder, setPriceHolder ] = useState(0);
+    const finalPrice = priceHolder;
 
     const updateQuantity = (number) =>{
         setQuantityUpdate(number)
-    }
+    };
 
     const ToCart = () =>{
         navigation.navigate('Cart');
-    }
+    };
 
     const AddToCart = async (menuDetails, menuVar, priceVar, quantityUpdateVar, keyVar) =>{
         menuDetails.menu=menuVar;
@@ -53,7 +56,7 @@ export const Breakfasts = () => {
                         style={styles.cartButton}
                         onPress={ToCart}
                     >
-                            <IconFontAwesome
+                            <FontAwesome
                                 style={styles.cartIcon}
                                 name='shopping-cart'
                                 size={40}
@@ -101,7 +104,7 @@ export const Breakfasts = () => {
                                         AddToCart(menuDetails, "Waterford Breakfast", "R 85.00", quantityUpdate, "Breakfasts01")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -140,7 +143,7 @@ export const Breakfasts = () => {
                                         AddToCart(menuDetails, "Beans With Hashbrown", "R 65.00", quantityUpdate, "Breakfasts02")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -180,7 +183,7 @@ export const Breakfasts = () => {
                                         AddToCart(menuDetails, "Homemade Waffle", "R 65.00", quantityUpdate, "Breakfasts03")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -222,7 +225,7 @@ export const Breakfasts = () => {
                                         AddToCart(menuDetails, "Breakfast Fruit Bowl", "R 72.00", quantityUpdate, "Breakfasts04")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -263,7 +266,7 @@ export const Breakfasts = () => {
                                         AddToCart(menuDetails, "STH Beef Oats", "R 55.00", quantityUpdate, "Breakfasts05")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}

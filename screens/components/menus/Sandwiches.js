@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import {FontAwesome} from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Sandwiches = () => {
@@ -30,8 +30,6 @@ const Sandwiches = () => {
         menuDetails.price=priceVar;
         menuDetails.quantity=quantityUpdateVar;
         menuDetails.key=keyVar;
-
-        alert(menuDetails.quantity)
         
         try{
             const jsonMenuValue = JSON.stringify(menuDetails);
@@ -53,7 +51,7 @@ const Sandwiches = () => {
                         style={styles.cartButton}
                         onPress={ToCart}
                     >
-                            <IconFontAwesome
+                            <FontAwesome
                                 style={styles.cartIcon}
                                 name='shopping-cart'
                                 size={40}
@@ -96,7 +94,7 @@ const Sandwiches = () => {
                                         AddToCart(menuDetails, "Chicken & Haloumi Quesadilla", "R 70.00", quantityUpdate, "Sandwiches01")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -136,7 +134,7 @@ const Sandwiches = () => {
                                         AddToCart(menuDetails, "Roasted Root Vegetable Tortilla Wrap", "R 65.00", quantityUpdate, "Sandwiches02")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -176,7 +174,7 @@ const Sandwiches = () => {
                                         AddToCart(menuDetails, "Slow Braised Chicken Tramazzini", "R 72.00", quantityUpdate, "Sandwiches03")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}

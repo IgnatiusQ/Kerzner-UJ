@@ -2,6 +2,10 @@ package com.ujeat;
 
 import com.facebook.react.ReactActivity;
 
+//ADDED:
+
+import org.amen.reactnative.locationswitch.LocationSwitch;
+
 public class MainActivity extends ReactActivity {
 
   /**
@@ -11,5 +15,13 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "UJeat";
+  }
+
+  //ADDED:
+
+  @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    LocationSwitch.getInstance().onActivityResult(requestCode, resultCode);
   }
 }

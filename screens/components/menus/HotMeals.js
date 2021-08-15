@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import {FontAwesome} from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const HotMeals = () => {
@@ -53,7 +53,7 @@ const HotMeals = () => {
                         style={styles.cartButton}
                         onPress={ToCart}
                     >
-                            <IconFontAwesome
+                            <FontAwesome
                                 style={styles.cartIcon}
                                 name='shopping-cart'
                                 size={40}
@@ -96,7 +96,7 @@ const HotMeals = () => {
                                         AddToCart(menuDetails, "Creamed Beef Pasta", "R 70.00", quantityUpdate, "HotMeals01")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -136,7 +136,7 @@ const HotMeals = () => {
                                         AddToCart(menuDetails, "Fish And Chips", "R 70.00", quantityUpdate, "HotMeals02")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}

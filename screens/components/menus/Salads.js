@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
+import {FontAwesome} from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Salads = () => {
@@ -53,7 +53,7 @@ const Salads = () => {
                         style={styles.cartButton}
                         onPress={ToCart}
                     >
-                            <IconFontAwesome
+                            <FontAwesome
                                 style={styles.cartIcon}
                                 name='shopping-cart'
                                 size={40}
@@ -102,7 +102,7 @@ const Salads = () => {
                                         AddToCart(menuDetails, "Garden Salad", "R 65.00", quantityUpdate, "Salads01")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -141,7 +141,7 @@ const Salads = () => {
                                         AddToCart(menuDetails, "Pasta Salad", "R 70.00", quantityUpdate, "Salads02")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}
@@ -180,7 +180,7 @@ const Salads = () => {
                                         AddToCart(menuDetails, "Haloumi & Peppadew Salad", "R 90.00", quantityUpdate, "Salads03")}
                                     }
                                 >
-                                    <IconFontAwesome
+                                    <FontAwesome
                                         style={styles.AddCartIcon}
                                         name='cart-plus'
                                         size={30}

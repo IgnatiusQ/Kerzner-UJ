@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Alert } from 'react-native';
 import Login from '../Login';
 //INSTALLED LIBRARIES
 import { useNavigation } from '@react-navigation/native';
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import {FontAwesome} from '@expo/vector-icons'
 import Feather from 'react-native-vector-icons/Feather';
 import Voice from 'react-native-voice';
 
@@ -137,21 +137,6 @@ const SearchField = ({navigation}) => {
 
     return(
         <View style={styles.searchView}>
-            {/* <TouchableHighlight
-                style={styles.backButton}
-                onPress={()=>{
-                    goToLogin}
-                }
-            >
-                <Feather
-                    style={styles.backIcon}
-                    name='arrow-left'
-                    size={40}
-                    color='white'
-                    selectionColor='#F2651C'
-                    accessibilityIgnoresInvertColors={true}
-                />
-            </TouchableHighlight> */}
 
             <View style={styles.searchContainer}>
                 <TextInput
@@ -164,7 +149,7 @@ const SearchField = ({navigation}) => {
                 >
                     {results[0]}
                 </TextInput>
-                <IconFontAwesome
+                <FontAwesome
                     style={styles.micIcon}
                     name='microphone'
                     size={30}

@@ -2,10 +2,9 @@ import React, {useState, useEffect} from 'react'
 import { View, Text, Image, StyleSheet, KeyboardAvoidingView, ScrollView,TouchableOpacity, TextInput, Alert, LogBox, Platform, StatusBar } from 'react-native'
 
 //INSTALLED LIBRARIES:
-import firebase from '@react-native-firebase/app';
-import auth from '@react-native-firebase/auth';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import PassMeter from "react-native-passmeter";
+import * as firebase  from 'firebase';
 
 const SignUp = ({navigation}) => {
     //INPUT STATE-VALUES & FUNCTION-UPDATORS
@@ -18,13 +17,6 @@ const SignUp = ({navigation}) => {
     
     //USER & DATABASE STATES
     const [initializing, setInitializing] = useState(true);
-
-    const user = {
-        userName:"",
-        userPhone:"",
-        userEmail:"",
-        userPassword:"",
-    };
     
     //ERROR MESSAGE
     let errorMessage = "";
@@ -34,14 +26,6 @@ const SignUp = ({navigation}) => {
         MIN_LEN = 6,
         PASS_LABELS = ["Too Short", "Weak", "Good", "Strong", "Strong"];
 
-
-    //HANDLING USER STATE CHANGES
-    // function onAuthStateChanged(user){
-    //     setUser(user);
-    //     if(initializing) {
-    //         setInitializing(false);
-    //     }
-    // };
 
     //ALERT BOX ERRORS
     const formErrors = () =>{
@@ -93,8 +77,7 @@ const SignUp = ({navigation}) => {
                                 console.log(errorMessage);
                             }
                             else if(password == confirmPassword){
-                                alert("Your account has been created successfully");
-                                navigation.navigate('Login');
+                                handleSignUp();
                             }
                         }
                     }
@@ -116,50 +99,19 @@ const SignUp = ({navigation}) => {
     useEffect(()=>{
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
         errorMessage="";
-        // const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-        // return subscriber;
+        
     }, []);
 
-    const testFirebase = () =>{
-        // let ref = firestore().collection('userProfiles');
-        // ref.add({
-        //     nameData: name,
-        //     phoneData: phone,
-        //     emailData: email,
-        //     passwordData: password,
-        // }).then(() =>{
-        //     console.log("Data Added")
-        // }).catch((error) =>{
-        //     console.log(`${error}`)
-        //     loading:true
-        // });
-
-
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then((response) => {
-                const uid = response.userEg.uid
-                const data = {
-                    id: uid,
-                    email,
-                    fullName,
-                };
-                const usersRef = firebase.firestore().collection('userProfiles')
-                usersRef
-                    .doc(uid)
-                    .set(data)
-                    .then(() => {
-                        navigation.navigate('SignUp', {userEg: data})
-                    })
-                    .catch((error) => {
-                        alert(error)
-                    });
-                })
-                .catch((error) => {
-                    alert(error)
-                });
-    }
+    const handleSignUp = () =>{
+        firebase.default
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => 
+            navigation.navigate('Login'),
+            console.log("account : ",email),
+        )
+        .catch(err => alert(err))
+    };
 
 
     return (
@@ -215,6 +167,7 @@ const SignUp = ({navigation}) => {
                         style={styles.InputBoxPassword}
                         // placeholder="Password"
                         value={password}
+                        maxLength={16}
                         onChangeText={(password)=>setPassword(password)}
                     />
                     <PassMeter
@@ -305,7 +258,6 @@ const styles = StyleSheet.create({
         marginTop:5,
     },
     SignUpButtonText:{
-        fontFamily:"Inter",
         fontWeight:"500",
         color: "#FFFFFF",
         marginTop:10,

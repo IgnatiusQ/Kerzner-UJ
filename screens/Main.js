@@ -18,7 +18,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 //INSTALLED LIBRARIES
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import {FontAwesome} from '@expo/vector-icons'
 import { FlatList } from 'react-native';
 import { Component } from 'react';
 import { ListItem } from 'react-native-elements/dist/list/ListItem';
