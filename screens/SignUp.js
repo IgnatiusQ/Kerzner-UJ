@@ -4,9 +4,12 @@ import { View, Text, Image, StyleSheet, KeyboardAvoidingView, ScrollView,Touchab
 //INSTALLED LIBRARIES:
 import PasswordInputText from 'react-native-hide-show-password-input';
 import PassMeter from "react-native-passmeter";
+import { useNavigation } from '@react-navigation/core';
 import * as firebase  from 'firebase';
 
-const SignUp = ({navigation}) => {
+const SignUp = () => {
+    const navigation = useNavigation();
+
     //INPUT STATE-VALUES & FUNCTION-UPDATORS
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
@@ -17,6 +20,8 @@ const SignUp = ({navigation}) => {
     
     //USER & DATABASE STATES
     const [initializing, setInitializing] = useState(true);
+
+    const user = firebase.default.auth().currentUser;
     
     //ERROR MESSAGE
     let errorMessage = "";
@@ -100,19 +105,45 @@ const SignUp = ({navigation}) => {
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
         errorMessage="";
         
+        firebase.default.auth().signOut().then(()=>{
+            console.log('no user signed in')
+        }).catch((error)=>{
+            console.log('sign out failed')
+        })
     }, []);
+
+    
 
     const handleSignUp = () =>{
         firebase.default
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => 
+            setCredentials(),
             navigation.navigate('Login'),
             console.log("account : ",email),
         )
         .catch(err => alert(err))
     };
 
+    const setCredentials = () =>{
+        firebase.default
+        .auth()
+        .currentUser
+        .updateProfile({
+            displayName: name
+        }).then(() =>{
+            console.log("display name: ", name)
+        }).catch((err) => console.log(err))
+    }
+
+    const pushToStore = () =>{
+        firebase.default.database().ref("orders/" + email).set({
+            userName : name,
+            phone_number : phone
+
+        });
+    }
 
     return (
         <KeyboardAvoidingView
@@ -128,6 +159,7 @@ const SignUp = ({navigation}) => {
                 <ScrollView
                     style={styles.View1}
                     alignItems="center"
+                    showsVerticalScrollIndicator={false}
                 >
                     <View style={styles.textSection}>
                     <Text style={styles.SignUpText}>

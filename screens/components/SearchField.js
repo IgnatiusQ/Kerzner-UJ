@@ -3,11 +3,10 @@ import { StyleSheet, View, TextInput, Alert } from 'react-native';
 import Login from '../Login';
 //INSTALLED LIBRARIES
 import { useNavigation } from '@react-navigation/native';
-import {FontAwesome} from '@expo/vector-icons'
-import Feather from 'react-native-vector-icons/Feather';
-import Voice from 'react-native-voice';
+import {FontAwesome} from '@expo/vector-icons';
+// import Voice from 'react-native-voice';
 
-const SearchField = ({navigation}) => {
+const SearchField = () => {
 
     const backNavigation = useNavigation();
 
@@ -23,18 +22,20 @@ const SearchField = ({navigation}) => {
     const [editableResult, setEditableResult] = useState(true);
 
     useEffect(()=>{
-        Voice.onSpeechStart = onSpeechStart;
-        Voice.onSpeechEnd = voiceInputOff;
-        Voice.onSpeechError = onSpeechError;
-        Voice.onSpeechResults = onSpeechResults;
-        Voice.onSpeechVolumeChanged = onSpeechVolumeChanged;
+        // try{
+        //     Voice.onSpeechStart = onSpeechStart;
+        //     Voice.onSpeechEnd = voiceInputOff;
+        //     Voice.onSpeechError = onSpeechError;
+        //     Voice.onSpeechResults = onSpeechResults;
+        //     Voice.onSpeechVolumeChanged = onSpeechVolumeChanged;
+        // }catch{(err) => console.log(err)};
+        
+        // setResults('');
 
-        setResults('');
-
-        return () => {
-            //destroy the voice process after exiting current screen
-            Voice.destroy().then(Voice.removeAllListeners);
-        };
+        // return () => {
+        //     //destroy the voice process after exiting current screen
+        //     Voice.destroy().then(Voice.removeAllListeners);
+        // };
     }, []);
 
     const alertRecording = () =>
@@ -133,11 +134,11 @@ const SearchField = ({navigation}) => {
         if(searchMenu !== ""){
             console.log(searchMenu)
         }
-    }
+    ;}
+
 
     return(
         <View style={styles.searchView}>
-
             <View style={styles.searchContainer}>
                 <TextInput
                     style={styles.searchField}
@@ -149,13 +150,13 @@ const SearchField = ({navigation}) => {
                 >
                     {results[0]}
                 </TextInput>
-                <FontAwesome
+                {/* <FontAwesome
                     style={styles.micIcon}
                     name='microphone'
                     size={30}
                     color={'#C4C4C4'}
                     onPress={voiceInputOn}
-                />
+                /> */}
             </View>
         </View>
     )
@@ -171,15 +172,9 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         height:50
     },
-    backButton:{
-        backgroundColor:'transparent'
+    sideTabIcon:{
+        marginLeft:5,
     },
-
-    // backIcon:{
-    //     marginHorizontal:5,
-    //     color:'#FFFFFF', 
-    // },
-
     searchContainer:{
         flexDirection:'row',
         justifyContent:'center',

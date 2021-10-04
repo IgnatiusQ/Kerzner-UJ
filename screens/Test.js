@@ -1,97 +1,124 @@
-import React, { useState, useEffect} from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
-
-
-
-
+import React from 'react'
+import { View, Text, ScrollView, StatusBar, StyleSheet, TouchableOpacity } from 'react-native'
+import {FontAwesome} from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/core'
+import * as firebase  from 'firebase'
 
 const Test = () => {
+  const navigation = useNavigation();
 
-  // auth()
-  // .signInWithEmailAndPassword('androidtest@gmail.com', 'androidTest')
-  // .then(() => {
-  //   console.log('User account created & signed in!');
-  // })
-  // .catch(error => {
-  //   if (error.code === 'auth/email-already-in-use') {
-  //     console.log('That email address is already in use!');
-  //   }
-
-  //   if (error.code === 'auth/invalid-email') {
-  //     console.log('That email address is invalid!');
-  //   }
-
-  //   console.error(error);
-  // });
-
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
-
-  auth().createUserWithEmailAndPassword("androidtest@gmail.com", "androidTest").then(()=>{
-    console.log("Account created");
-  })
-
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  const [item, setItem] = useState('');
-
-    const ref = firestore().collection('userProfiles')
-  
-    const addItem = async() =>{
-      await ref.add({
-        title: item,
-        complete: false,
-      });
-      setItem('');
-    }
+  const signOut = () =>{
+    firebase.default
+      .auth()
+      .signOut()
+      .then(function(){
+        navigation.navigate('Login');
+        console.log("Signed Out")
+      }).catch(function(err){
+        alert(err);
+        console.log(err);
+      })
+  }
 
   return (
-    <View>
-      <TextInput
-        style={{width:230, borderColor:'black', borderWidth:2, alignSelf:'center', marginVertical:20}}
-        placeholder='Add something'
-        onChangeText={(item)=>{setItem}}
+    <View style={styles.container}>
+      <StatusBar
+        animated={true}
+        backgroundColor='#F2651C'
+        networkActivityIndicatorVisible={true}
+        animated={true}
       />
-      <Button
-        title='Add'
-        onPress={()=>addItem()}
-      />
-      <Text>
-        Added Items :
-      </Text>
+
+      <ScrollView>
+        <TouchableOpacity style={styles.fieldContainer}>
+          <FontAwesome
+            style={styles.profileIcon}
+            name='user-circle-o'
+            size={30}
+            color='#FFFFFF'
+          />
+          <Text style={styles.text}>
+            Profile
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.fieldContainer}
+          onPress={()=>navigation.navigate('Cart')}
+        >
+          <FontAwesome
+            style={styles.profileIcon}
+            name='shopping-cart'
+            size={30}
+            color='#FFFFFF'
+          />
+          <Text style={styles.text}>
+            Orders
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.fieldContainer}>
+          <FontAwesome
+            style={styles.profileIcon}
+            name='wpforms'
+            size={30}
+            color='#FFFFFF'
+          />
+          <Text style={styles.text}>
+            Privacy Policy
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.fieldContainer}>
+          <FontAwesome
+            style={styles.profileIcon}
+            name='shield'
+            size={30}
+            color='#FFFFFF'
+          />
+          <Text style={styles.text}>
+            Security
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.fieldContainer}
+          onPress={signOut}
+        >
+          <FontAwesome
+            style={styles.profileIcon}
+            name='sign-out'
+            size={30}
+            color='#FFFFFF'
+          />
+          <Text style={styles.text}>
+            Sign Out
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   )
 }
 
 export default Test
 
-
-
-
-
-
-
-
-
-
-
-
-//Initial firestore rules
-
-// rules_version = '2';
-// service cloud.firestore {
-//   match /databases/{database}/documents {
-//     match /{document=**} {
-//       allow read, write: if true;
-//     }
-//   }
-// }
+const styles = StyleSheet.create({
+  container:{
+    backgroundColor:'#F2651C',
+    paddingVertical:106.5
+  },
+  fieldContainer:{
+    marginHorizontal:15,
+    borderBottomWidth:2,
+    borderBottomColor:'#ffa275',
+    flexDirection:'row'
+  },
+  profileIcon:{
+    marginVertical:20,
+  },
+  text:{
+    color:'#FFFFFF',
+    marginHorizontal:10,
+    marginVertical:20,
+  }
+})

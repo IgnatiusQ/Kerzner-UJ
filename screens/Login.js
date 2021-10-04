@@ -2,9 +2,13 @@ import React, {useState, useEffect} from 'react'
 import { View, Text,StyleSheet, TextInput, LogBox, Alert, TouchableOpacity, StatusBar, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
 //INSTALLED PACKAGES:
 import PasswordInputText from 'react-native-hide-show-password-input';
-import * as firebase  from 'firebase';
+import firebase from 'firebase'
+import { useNavigation } from '@react-navigation/core'
 
-const Login = ({navigation}) => {
+const Login = () => {
+    const navigation = useNavigation();
+    
+    const provider = new firebase.default.auth.GoogleAuthProvider();
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,9 +17,13 @@ const Login = ({navigation}) => {
     useEffect(()=>{
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
         errorMessage="";
+        
+        firebase.default.auth().signOut().then(()=>{
+            console.log('no user signed in')
+        }).catch((error)=>{
+            console.log('sign out failed')
+        })
     }, []);
-
-
 
     const formErrors = () =>{
         if(errorMessage!==""){
@@ -46,6 +54,7 @@ const Login = ({navigation}) => {
                 }
                 else{
                     handleLogIn();
+                    stateObserver();
                 }
             }
         } 
@@ -59,6 +68,15 @@ const Login = ({navigation}) => {
         navigation.navigate('SignUp');
     };
 
+    const createProfile = () =>{
+        user.updateProfile({
+            displayName : name,
+        //////////
+        }).then(() =>{
+            console.log('username : ', user.displayName);
+        }).catch((err) => console.log(err))
+    };
+
     const handleLogIn = () =>{
         firebase.default
             .auth()
@@ -69,6 +87,28 @@ const Login = ({navigation}) => {
             )
             .catch(err => alert(err));
     };
+
+    const stateObserver = () =>{
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in.
+              console.log('Logged In')
+            } else {
+              console.log('Signed out')
+            }
+        });
+    }
+
+    const googleLogin = () =>{ //ONLY WORKS WHEN DEPLOYED
+        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+        firebase
+            .auth()
+            .signInWithRedirect(provider)
+            .then(function(result){
+                console.log(result)
+            }).catch(error => console.log(error))        
+    }
 
     return (
         <KeyboardAvoidingView
@@ -82,7 +122,7 @@ const Login = ({navigation}) => {
                 animated={true}
             />
 
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.textSection}>
                     <Text style={styles.LogInText}>
                         Log In
@@ -114,6 +154,15 @@ const Login = ({navigation}) => {
                 />
 
                 <TouchableOpacity
+                    style={styles.ClickableTextButton}
+                    onPress={googleLogin}
+                >
+                    <Text style={styles.ClickableTextGoogle}>
+                        Login with Google
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
                     style={styles.LogSignButton}
                     onPress={signInButton}    
                 >
@@ -131,8 +180,8 @@ const Login = ({navigation}) => {
                     </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.ForgotPassButton}>
-                    <Text style={styles.ForgotPassText}>
+                <TouchableOpacity style={styles.ClickableTextButton}>
+                    <Text style={styles.ClickableText}>
                         Forgot Password?
                     </Text>
                 </TouchableOpacity>
@@ -162,7 +211,6 @@ const styles = StyleSheet.create({
         marginVertical:5,
     },
     KerznerHeadText:{
-        fontFamily:"Elephant",
         marginTop:30,
         fontWeight:"bold",
         fontSize:36,
@@ -209,11 +257,18 @@ const styles = StyleSheet.create({
         color: "#FFFFFF",
         marginTop:10,
     },
-    ForgotPassButton:{
+    ClickableTextButton:{
         backgroundColor:"transparent",
         alignSelf:"center",
     },
-    ForgotPassText:{
+    ClickableTextGoogle:{
+        color:"#023d9e",
+        textDecorationLine: 'underline',
+        fontSize:16,
+        fontWeight:"600",
+        marginTop:10,
+    },
+    ClickableText:{
         color:"#F2651C",
         fontSize:16,
         fontWeight:"600",

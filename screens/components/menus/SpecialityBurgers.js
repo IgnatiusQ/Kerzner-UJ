@@ -31,8 +31,6 @@ const SpecialityBurgers = () => {
         menuDetails.quantity=quantityUpdateVar;
         menuDetails.key=keyVar;
 
-        // alert(menuDetails.quantity)
-        
         try{
             const jsonMenuValue = JSON.stringify(menuDetails);
             await AsyncStorage.setItem(keyVar, jsonMenuValue)
@@ -196,6 +194,7 @@ export default SpecialityBurgers
 
 const styles = StyleSheet.create({
     container:{
+        flex:1,
         marginHorizontal:5,
         marginVertical:5,
         borderBottomColor:'#F2651C',

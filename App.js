@@ -18,8 +18,9 @@ import Location from './screens/Location';
 import PickupOptions from './screens/PickupOptions.js';
 import SearchField from './screens/components/SearchField.js';
 import TabBar from './screens/components/TabBar.js';
+import Profile from './screens/Profile.js';
 
-// import Test from './screens/Test.js';
+import Test from './screens/Test.js';
 
 //IMPORTING MENUS FROM MENU FOLDER
 import Breakfasts from './screens/components/menus/Breakfasts';
@@ -50,6 +51,8 @@ var firebaseConfig = {
   appId: "1:33228726875:web:d7d81f3b75f7c28416557e",
   measurementId: "G-C17FJMG9KT"
 };
+
+
 // INITIALIZE FIREBASE:
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -83,17 +86,21 @@ function App(){
           <Stack.Screen name='Location' component={Location} options={{headerShown:false}}/>
           <Stack.Screen name='PickupOptions' component={PickupOptions} options={{headerShown:false}}/>
 
-          {/* <Stack.Screen name='Test' component={Test} options={{headerShown:false}}/> */}
+          <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}}/>
+
+          <Stack.Screen name='TabBar' component={TabBar} options={{headerShown:false}}/>
+
+          <Stack.Screen name='Test' component={Test} options={{headerShown:false}}/>
           
           {/* MAIN SCREEN STACK */}
           {/* MENUS STACK */}
           <Stack.Screen name='Deserts' component={Deserts} options={{headerShown:false}}/>
           <Stack.Screen name='Drinks' component={Drinks} options={{headerShown:false}}/>
           <Stack.Screen name='Breakfasts' component={Breakfasts} options={{headerShown:false}}/>
-          {/* <Stack.Screen name='HotMeals' component={HotMeals} options={{headerShown:false}}/> */}
-          {/* <Stack.Screen name='Salads' component={Salads} options={{headerShown:false}}/> */}
+          <Stack.Screen name='HotMeals' component={HotMeals} options={{headerShown:false}}/>
+          <Stack.Screen name='Salads' component={Salads} options={{headerShown:false}}/>
           <Stack.Screen name='Sandwiches' component={Sandwiches} options={{headerShown:false}}/>
-          {/* <Stack.Screen name='SignaturePizzas' component={SignaturePizzas} options={{headerShown:false}}/> */}
+          <Stack.Screen name='SignaturePizzas' component={SignaturePizzas} options={{headerShown:false}}/>
           <Stack.Screen name='SpecialityBurgers' component={SpecialityBurgers} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>
