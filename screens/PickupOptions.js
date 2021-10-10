@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { View, Text, StyleSheet, BackHandler, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, BackHandler, TouchableOpacity, LogBox } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import {NavigationApps,actions,googleMapsTravelModes} from "react-native-navigation-apps"
 
@@ -10,6 +10,9 @@ const PickupOption = () => {
         navigation.navigate('Main')
     }
 
+    useEffect(() => {
+        LogBox.ignoreAllLogs();
+    })
     return (
         <View style={styles.container}>
             <View style={styles.headContainer}>

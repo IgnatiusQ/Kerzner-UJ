@@ -102,7 +102,7 @@ const SignUp = () => {
     };
 
     useEffect(()=>{
-        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);     //IGNORE ANIMATION WARNING
+        LogBox.ignoreAllLogs();     //IGNORE ANIMATION WARNING
         errorMessage="";
         
         firebase.default.auth().signOut().then(()=>{

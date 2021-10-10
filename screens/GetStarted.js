@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { TouchableOpacity, Text, View, Dimensions, Button, StatusBar, ScrollView, Image, StyleSheet } from 'react-native'
-import SignUp from './SignUp'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const { width, height } = Dimensions.get('window');
 let imageHeight = height - 80;
@@ -9,6 +9,13 @@ let imageHeight = height - 80;
 const GetStarted = () => {
 
     const navigation = useNavigation();
+
+    const [hasLaunched, setHasLaunched] = useState('false');
+
+    const setLaunchState = async() =>{
+        setHasLaunched('true');
+        AsyncStorage.setItem('launchStatus', hasLaunched);
+    }
 
     useEffect(() =>{
         const numOfBackground = 3;
@@ -26,6 +33,7 @@ const GetStarted = () => {
     })
 
     const goToSignUp = () =>{
+        setLaunchState();
         navigation.navigate('Login');
     }
     

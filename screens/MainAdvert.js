@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, Image, ScrollView, StyleSheet, Linking } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, LogBox, Text, Image, ScrollView, StyleSheet, Linking } from 'react-native'
 
 //INSTALLED LIBRARIES
 import { SliderBox } from "react-native-image-slider-box";
@@ -15,6 +15,10 @@ const MainAdvert = ({navigation}) => {
     const advertHandler = () =>{
         Linking.openURL('https://thekerzneratuj.com/');
     };
+
+    useEffect(() => {
+        LogBox.ignoreAllLogs();
+    })
 
     return (
         <View style={styles.advertField}>

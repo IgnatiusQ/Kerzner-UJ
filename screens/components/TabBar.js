@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text, ScrollView, StatusBar, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, LogBox, Text, ScrollView, StatusBar, StyleSheet, TouchableOpacity } from 'react-native'
 import {FontAwesome} from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/core'
 import * as firebase  from 'firebase'
@@ -29,6 +29,7 @@ const TabBar = () => {
   }
 
   useEffect(() => {
+    LogBox.ignoreAllLogs();
     // console.log(user.displayName)
     // setUsername(user.displayName);
   }, [])

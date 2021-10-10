@@ -1,6 +1,6 @@
 import React,{ useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/core'
-import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native'
+import { LogBox, View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {FontAwesome} from '@expo/vector-icons'
 
@@ -203,6 +203,8 @@ const Cart = () => {
 
 
     useEffect(()=>{
+        LogBox.ignoreAllLogs();
+
         allPrices.finalPriceBreakfast1 = priceBreakfast1,
         allPrices.finalPriceBreakfast2 = priceBreakfast2,
         allPrices.finalPriceBreakfast3 = priceBreakfast3,

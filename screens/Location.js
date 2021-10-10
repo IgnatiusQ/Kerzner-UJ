@@ -21,6 +21,8 @@ const Location = () => {
 
     const [orderType, setOrderType] = useState('PICKUP');
 
+    const [orderStatus, setOrderStatus] = useState(false);
+
     let priceVar = 0;
 
     //Breakfasts
@@ -715,7 +717,7 @@ const Location = () => {
     //PUSH TO FIREBASE
     const pushOrder = () =>{
         fetchLocation();
-        pushToFirebase();
+        status();
     }
 
     const finishOrder = () =>{
@@ -743,356 +745,58 @@ const Location = () => {
         }
     }
 
-    const pushToFirebase = () =>{
-
-        //Burgers
-        if(burger1Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuBurger1,
-                    order_quantity : quantityBurger1,
-                    order_price : priceBurger1,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyBurger1
-                });
-            } catch (error) {
-                console.log(error)   
-            }
+    const status = () =>{
+        if(breakfast1Status==true||breakfast3Status==true||breakfast2Status==true||
+        pizza1Status==true||pizza2Status==true||pizza3Status==true||
+        salad1Status==true||salad2Status==true||salad3Status==true||
+        burger1Status==true||burger2Status==true||burger3Status==true||
+        hotMeal1Status==true||hotMeal2Status==true||
+        sandwich1Status==true||sandwich2Status==true||sandwich3Status==true)
+        {
+            setOrderStatus(true);
+            finalOrder();
         }
+    }
+    const finalOrder = () =>{
+        if(orderStatus == true){
+            try {
+                firebase
+                .default
+                .database()
+                .ref('orders/' + auth.displayName)
+                .update({
+                    email_addr : auth.email,
 
-        if(burger2Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuBurger2,
-                    order_quantity : quantityBurger2,
-                    order_price : priceBurger2,
+                    order_menu : "/"+menuBreakfast1+"/"+menuBreakfast2+"/"+menuBreakfast3+
+                                "/"+menuBurger1+"/"+menuBurger2+"/"+menuBurger3+
+                                "/"+menuHotMeal1+"/"+menuHotMeal2+
+                                "/"+menuPizza1+"/"+menuPizza2+"/"+menuPizza3+
+                                "/"+menuSalad1+"/"+menuSalad2+"/"+menuSalad3+
+                                "/"+menuSandwich1+"/"+menuSandwich2+"/"+menuSandwich3+"/",
+
+                    order_quantity : "/"+quantityBreakfast1+"/"+quantityBreakfast2+"/"+quantityBreakfast3+
+                                "/"+quantityBurger1+"/"+quantityBurger2+"/"+quantityBurger3+
+                                "/"+quantityHotMeal1+"/"+quantityHotMeal2+
+                                "/"+quantityPizza1+"/"+quantityPizza2+"/"+quantityPizza3+
+                                "/"+quantitySalad1+"/"+quantitySalad2+"/"+quantitySalad3+
+                                "/"+quantitySandwich1+"/"+quantitySandwich2+"/"+quantitySandwich3+"/",
+
+                    order_price : "/"+priceBreakfast1+"/"+priceBreakfast2+"/"+priceBreakfast3+
+                                "/"+priceBurger1+"/"+priceBurger2+"/"+priceBurger3+
+                                "/"+priceHotMeal1+"/"+priceHotMeal2+
+                                "/"+pricePizza1+"/"+pricePizza2+"/"+pricePizza3+
+                                "/"+priceSalad1+"/"+priceSalad2+"/"+priceSalad3+
+                                "/"+priceSandwich1+"/"+priceSandwich2+"/"+priceSandwich3+"/",
+
                     total_order_price : "R "+priceVar+".00",
+
                     order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyBurger2
-                });
-            } catch (error) {
-                console.log(error)   
-            }
-        }
-        
-        if(burger3Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuBurger3,
-                    order_quantity : quantityBurger3,
-                    order_price : priceBurger3,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyBurger3
+
+                    order_ref : auth.uid +" "+currentDate
                 });
             } catch (error) {
                 console.log(error)
             }
-        }
-
-        //Breakfasts
-        if(breakfast1Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuBreakfast1,
-                    order_quantity : quantityBreakfast1,
-                    order_price : priceBreakfast1,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyBreakfast1
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        } 
-
-        if(breakfast2Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuBreakfast2,
-                    order_quantity : quantityBreakfast2,
-                    order_price : priceBreakfast2,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyBreakfast2
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        
-        if(breakfast3Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuBreakfast3,
-                    order_quantity : quantityBreakfast3,
-                    order_price : priceBreakfast3,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyBreakfast3
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        
-        //Sandwiches
-        if(sandwich1Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuSandwich1,
-                    order_quantity : quantitySandwich1,
-                    order_price : priceSandwich1,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keySandwich1
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        if(sandwich2Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuSandwich2,
-                    order_quantity : quantitySandwich2,
-                    order_price : priceSandwich2,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keySandwich2
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        if(sandwich3Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuSandwich3,
-                    order_quantity : quantitySandwich3,
-                    order_price : priceSandwich3,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keySandwich3
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    
-
-        //Pizzas
-        if(pizza1Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuPizza1,
-                    order_quantity : quantityPizza1,
-                    order_price : pricePizza1,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyPizza1
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        if(pizza2Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuPizza2,
-                    order_quantity : quantityPizza2,
-                    order_price : pricePizza2,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyPizza2
-                });
-            } catch (error) {
-                console.log(error)
-            }   
-        }
-
-        if(pizza3Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuPizza1,
-                    order_quantity : quantityPizza3,
-                    order_price : pricePizza2,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyPizza3
-                });
-            } catch (error) {
-                console.log(error)
-            }      
-        }
-
-
-        //HotMeals
-        if(hotMeal1Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuHotMeal1,
-                    order_quantity : quantityHotMeal1,
-                    order_price : priceHotMeal1,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyHotMeal1
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        if(hotMeal2Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuHotMeal2,
-                    order_quantity : quantityHotMeal2,
-                    order_price : priceHotMeal2,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keyHotMeal2
-                });
-            } catch (error) {
-                console.log(error)
-            }
-    
-        }
-
-        //Salads
-        if(salad1Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuSalad1,
-                    order_quantity : quantitySalad1,
-                    order_price : priceSalad1,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keySalad1
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        if(salad2Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuSalad2,
-                    order_quantity : quantitySalad2,
-                    order_price : priceSalad2,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keySalad2
-                });
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        if(salad3Status == true){
-            try {
-                firebase
-                .default
-                .database()
-                .ref('orders/' + auth.displayName)
-                .update({
-                    email_addr : auth.email,
-                    order_menu : menuSalad3,
-                    order_quantity : quantitySalad3,
-                    order_price : priceSalad3,
-                    total_order_price : "R "+priceVar+".00",
-                    order_type : orderType,
-                    order_ref : auth.uid +" "+currentDate +" "+ keySalad3
-                });
-            } catch (error) {
-                console.log(error)
-            }   
         }
     }
 

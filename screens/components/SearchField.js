@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Alert, LogBox } from 'react-native';
 import Login from '../Login';
 //INSTALLED LIBRARIES
 import { useNavigation } from '@react-navigation/native';
@@ -22,6 +22,7 @@ const SearchField = () => {
     const [editableResult, setEditableResult] = useState(true);
 
     useEffect(()=>{
+        LogBox.ignoreAllLogs();
         // try{
         //     Voice.onSpeechStart = onSpeechStart;
         //     Voice.onSpeechEnd = voiceInputOff;

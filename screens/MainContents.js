@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/core'
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image, LogBox } from 'react-native'
 
 const MainContents = () => {
 
@@ -43,6 +43,9 @@ const MainContents = () => {
     const showAllCats = () =>{
         null
     }
+    useEffect(() => {
+        LogBox.ignoreAllLogs();
+    })
 
     const toSelectedMenu = (selected) =>{
         navigation.navigate(selected)

@@ -1,124 +1,108 @@
-import React from 'react'
-import { View, Text, ScrollView, StatusBar, StyleSheet, TouchableOpacity } from 'react-native'
-import {FontAwesome} from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/core'
-import * as firebase  from 'firebase'
+// import React, {useEffect, useState} from 'react'
+// import { View, Text } from 'react-native'
 
-const Test = () => {
-  const navigation = useNavigation();
+// const Test = () => {
 
-  const signOut = () =>{
-    firebase.default
-      .auth()
-      .signOut()
-      .then(function(){
-        navigation.navigate('Login');
-        console.log("Signed Out")
-      }).catch(function(err){
-        alert(err);
-        console.log(err);
-      })
+//   const email_addr = "/////email1@email.com/email2@email.com//email3@email.com/////email4@email.com/email5@email.com"
+//   const [email1, setEmail1] = useState("");
+//   const [email2, setEmail2] = useState("");
+//   const [email3, setEmail3] = useState("");
+//   const [email4, setEmail4] = useState("");
+//   const [email5, setEmail5] = useState("");
+
+//   const emailArray = email_addr.split("/");
+
+//   const fixArr = () =>{
+//     var len = emailArray.length, i;
+//     for(i = 0; i < len; i++ ){
+//       emailArray[i] && emailArray.push(emailArray[i]);
+//     }
+//     emailArray.splice(0, len);
+
+//     console.log(emailArray)
+//   }
+
+//   useEffect(() => {
+//     fixArr();
+//   })
+
+//   return (
+//     <View>
+//       <Text>Test Screen</Text>
+//     </View>
+//     )
+// }
+
+// export default Test
+
+
+
+import React, { Component } from 'react'
+import { Text, View } from 'react-native'
+import * as firebase from 'firebase'
+
+export class Test extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      order_menu : "",
+      order_price : "",
+      order_quantity : "",
+    }
   }
 
-  return (
-    <View style={styles.container}>
-      <StatusBar
-        animated={true}
-        backgroundColor='#F2651C'
-        networkActivityIndicatorVisible={true}
-        animated={true}
-      />
+  fetchData(){
+    firebase.default.database()
+    .ref('orders/')
+    .on('value', snapshot => {
+      const data = snapshot.val();
+      this.setState({
+        order_menu : data.order_menu,
+        order_price : data.order_price,
+        order_quantity : data.order_quantity
+      })
+    })
+    console.log(this.order_menu);
+  }
 
-      <ScrollView>
-        <TouchableOpacity style={styles.fieldContainer}>
-          <FontAwesome
-            style={styles.profileIcon}
-            name='user-circle-o'
-            size={30}
-            color='#FFFFFF'
-          />
-          <Text style={styles.text}>
-            Profile
-          </Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.fieldContainer}
-          onPress={()=>navigation.navigate('Cart')}
-        >
-          <FontAwesome
-            style={styles.profileIcon}
-            name='shopping-cart'
-            size={30}
-            color='#FFFFFF'
-          />
-          <Text style={styles.text}>
-            Orders
-          </Text>
-        </TouchableOpacity>
+  displayQuantity(){
+    quantity.map(data => {
+      return(<td>{data}</td>)
+    })
+  }
+  
 
-        <TouchableOpacity style={styles.fieldContainer}>
-          <FontAwesome
-            style={styles.profileIcon}
-            name='wpforms'
-            size={30}
-            color='#FFFFFF'
-          />
-          <Text style={styles.text}>
-            Privacy Policy
-          </Text>
-        </TouchableOpacity>
+  componentDidMount(){
+    this.fetchData();
+  }
 
-        <TouchableOpacity style={styles.fieldContainer}>
-          <FontAwesome
-            style={styles.profileIcon}
-            name='shield'
-            size={30}
-            color='#FFFFFF'
-          />
-          <Text style={styles.text}>
-            Security
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.fieldContainer}
-          onPress={signOut}
-        >
-          <FontAwesome
-            style={styles.profileIcon}
-            name='sign-out'
-            size={30}
-            color='#FFFFFF'
-          />
-          <Text style={styles.text}>
-            Sign Out
-          </Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
-  )
+  render() {
+    return (
+      <View>
+        <Text> Test Screen </Text>
+      </View>
+    )
+  }
 }
 
 export default Test
 
-const styles = StyleSheet.create({
-  container:{
-    backgroundColor:'#F2651C',
-    paddingVertical:106.5
-  },
-  fieldContainer:{
-    marginHorizontal:15,
-    borderBottomWidth:2,
-    borderBottomColor:'#ffa275',
-    flexDirection:'row'
-  },
-  profileIcon:{
-    marginVertical:20,
-  },
-  text:{
-    color:'#FFFFFF',
-    marginHorizontal:10,
-    marginVertical:20,
-  }
-})
+
+// fetchMenuElement(){
+//   menu.forEach(data => {
+//     return (<td>{data}</td>)
+//   });
+//   quantity.forEach(data => {
+//     return (<td>{data}</td>)
+//   });
+//   price.forEach(data => {
+//     return (<td>{data}</td>)
+//   });
+// }
+
+// displayMenus(){
+//   menu.map(data => {
+//     return(<td>{data}</td>)
+//   })
+// }
