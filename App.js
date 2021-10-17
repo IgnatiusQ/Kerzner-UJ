@@ -21,7 +21,7 @@ import SearchFieldReal from './screens/components/SearchFieldReal.js';
 import TabBar from './screens/components/TabBar.js';
 import Profile from './screens/Profile.js';
 
-import MainContents from './screens/MainContents.js';
+// import Test from './screens/Test.js';
 
 //IMPORTING MENUS FROM MENU FOLDER
 import Breakfasts from './screens/components/menus/Breakfasts';
@@ -176,7 +176,7 @@ function App(){
           <Stack.Screen name='Location' component={Location} options={{headerShown:false}}/>
           <Stack.Screen name='PickupOptions' component={PickupOptions} options={{headerShown:false}}/>
 
-          <Stack.Screen name='MainContents' component={MainContents} options={{headerShown:false}}/>
+          {/* <Stack.Screen name='Test' component={Test} options={{headerShown:false}}/> */}
 
           <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}}/>
 
