@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, StatusBar, Image } from 'react-native'
 
-const Splash = ({navigation}) => {
+const Splash = () => {
     return (
         <View style={styles.container}>
             <StatusBar

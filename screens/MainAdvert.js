@@ -4,7 +4,7 @@ import { View, LogBox, Text, Image, ScrollView, StyleSheet, Linking } from 'reac
 //INSTALLED LIBRARIES
 import { SliderBox } from "react-native-image-slider-box";
 
-const MainAdvert = ({navigation}) => {
+const MainAdvert = () => {
 
     const images = [
         require('../image_props/pablo-merchan-montes-0nT08Z-MhiE-unsplash.jpg'),

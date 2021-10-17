@@ -3,19 +3,12 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { View, Text, StyleSheet, ImageBackground } from 'react-native'
 
-import Breakfasts from './menus/Breakfasts'
-import HotMeals from './menus/HotMeals'
-import Salads from './menus/Salads'
-import Sandwiches from './menus/Sandwiches'
-import SignaturePizzas from './menus/SignaturePizzas'
-import SpecialityBurgers from './menus/SpecialityBurgers'
-
 
 export const Breakfast_Thumb = () =>{
     const navigation = useNavigation();
 
     const goToBreakfast = () =>{
-        navigation.navigate(Breakfasts)
+        navigation.navigate('Breakfasts')
     }
 
     return(
@@ -41,7 +34,7 @@ export const Salads_Thumb = () =>{
     const navigation = useNavigation();
 
     const goToSalads = () =>{
-        navigation.navigate(Salads)
+        navigation.navigate('Salads')
     }
 
     return(
@@ -67,7 +60,7 @@ export const SpecialityBurgers_Thumb = () =>{
     const navigation = useNavigation();
 
     const goToSpecialityBurgers = () =>{
-        navigation.navigate(SpecialityBurgers)
+        navigation.navigate('SpecialityBurgers')
     }
     return(
         <TouchableOpacity onPress={goToSpecialityBurgers}>
@@ -92,7 +85,7 @@ export const Sandwitches_Thumb = () =>{
     const navigation = useNavigation();
 
     const goToSandwiches = () =>{
-        navigation.navigate(Sandwiches)
+        navigation.navigate('Sandwiches')
     }
 
     return(
@@ -118,7 +111,7 @@ export const HotMeals_Thumb = () =>{
     const navigation = useNavigation();
 
     const goToHotMeals = () =>{
-        navigation.navigate(HotMeals)
+        navigation.navigate('HotMeals')
     }
 
     return(
@@ -144,7 +137,7 @@ export const SignaturePizzas_Thumb = () =>{
     const navigation = useNavigation();
 
     const goToSignaturePizzas = () =>{
-        navigation.navigate(SignaturePizzas)
+        navigation.navigate('SignaturePizzas')
     }
 
     return(
@@ -170,7 +163,7 @@ export const Omelets_Thumb = () =>{
     const navigation = useNavigation();
 
     const goToOmelets = () =>{
-        navigation.navigate(Omelets)
+        navigation.navigate('Omelets')
     }
 
     return(

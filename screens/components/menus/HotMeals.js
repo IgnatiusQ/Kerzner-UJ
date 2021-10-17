@@ -108,7 +108,7 @@ const HotMeals = () => {
                     </View>
 
                     <View style={styles.menuContainer}>
-                        <Text style={styles.menuName}>Fish And Chips</Text>
+                        <Text style={styles.menuName}>Fish {"&"} Chips</Text>
                         <Text style={styles.menuIngredients}>Served with Choice of Side Salad or STH House Fries {"&"} tartare sauce</Text>
                         <Text style={styles.menuExtra}>A five spice Battered Hake fried to perfection</Text>
                         

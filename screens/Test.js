@@ -1,108 +1,264 @@
-// import React, {useEffect, useState} from 'react'
-// import { View, Text } from 'react-native'
+// import React in our code
+import React, {useState, useEffect} from 'react';
 
-// const Test = () => {
+// import all the components we are going to use
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  View,
+  FlatList,
+  TextInput,
+} from 'react-native';
 
-//   const email_addr = "/////email1@email.com/email2@email.com//email3@email.com/////email4@email.com/email5@email.com"
-//   const [email1, setEmail1] = useState("");
-//   const [email2, setEmail2] = useState("");
-//   const [email3, setEmail3] = useState("");
-//   const [email4, setEmail4] = useState("");
-//   const [email5, setEmail5] = useState("");
+const Test = () => {
+  const [search, setSearch] = useState('');
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
 
-//   const emailArray = email_addr.split("/");
+  var data = [
+    {
+      "menuId": 1,
+      "id": "Hot Meal",
+      "title": "Creamed Beef Pasta",
+      "body": "Layered Beef with Provençale style sauce, cream & Pecorino Cheese",
+      "ref" : 'HotMeals'
+    },
+	  {
+      "menuId": 2,
+      "id": "Hot Meal",
+      "title": "Fish And Chips",
+      "body": "Served with Choice of Side Salad or STH House Fries & tartare sauce",
+      "ref" : 'HotMeals'
+    },
+	
+	  {
+      "menuId": 3,
+      "id": "Burger",
+      "title": "STH Beef Burger",
+      "body": "An all-South African 100% beef Burger with brown mushroom and mozzarella cheese, Caramelized Onion, Lettuce & Tomato, Pickles served on a Sesame seed roll",
+      "ref" : 'SpecialityBurgers'
+    },
+	  {
+      "menuId": 4,
+      "id": "Burger",
+      "title": "STH Chicken Burger",
+      "body": "An all-South African Chicken Breast Burger with brown mushroom and mozzarella cheese, Caramelized Onion, Lettuce & Tomato, Pickles served on a Sesame seed roll",
+      "ref" : 'SpecialityBurgers'
+    },
+	  {
+      "menuId": 5,
+      "id": "Burger",
+      "title": "STH Falafel Burger",
+      "body": "A North African chickpea Burger with brown mushroom and mozzarella cheese, Caramelized Onion, Lettuce & Tomato, Pickles served on a Sesame seed roll",
+      "ref" : 'SpecialityBurgers'
+    },
+	
+	  {
+      "menuId": 6,
+      "id": "Pizza",
+      "title": "BBQ Chicken & Mushroom Pizza",
+      "body": "A freshly made pizza made with mozzarella cheese, Tangy Tomato, BBQ Chicken, Mushroom & Peppers",
+      "ref" : 'SignaturePizzas'
+    },
+	  {
+      "menuId": 7,
+      "id": "Pizza",
+      "title": "Four Seasons Pizza",
+      "body": "A freshly prepared pizza made with Mozzarella Cheese, Spinach, Feta, Mushrooms & Olives",
+      "ref" : 'SignaturePizzas'
+    },
+	  {
+      "menuId": 8,
+      "id": "Pizza",
+      "title": "Meat Lovers Delight",
+      "body": "A freshly prepared pizza made with Mozzarella Cheese, Salami, Pork Ribs, Feta, Mushrooms & Bacon Jam",
+      "ref" : 'SignaturePizzas'
+    },
+	
+	  {
+      "menuId": 9,
+      "id": "Sandwich",
+      "title": "Chicken & Haloumi Quesadilla",
+      "body": "Served with Choice of Side Salad or STH House Fries",
+      "ref" : 'Sandwiches'
+    },
+	  {
+      "menuId": 10,
+      "id": "Sandwich",
+      "title": "Roasted Root Vegetable Tortilla Wrap",
+      "body": "Served with Choice of Side Salad or STH House Fries",
+      "ref" : 'Sandwiches'
+    },
+	  {
+      "menuId": 11,
+      "id": "Sandwich",
+      "title": "Slow Braised Chicken Tramazzini",
+      "body": "Served with Choice of Side Salad or STH House Fries",
+      "ref" : 'Sandwiches'
+    },
+	
+	  {
+      "menuId": 12,
+      "id": "Salad",
+      "title": "Garden Salad",
+      "body": "A fresh seasonal salad with Garden leaves, English cucumbers, heirloom Tomatoes, Wheat croutons, Black Kalamata Olives & Greek Feta Cheese, Honey Mustard Dressing",
+      "ref" : 'Salads'
+    },
+	  {
+      "menuId": 13,
+      "id": "Salad",
+      "title": "Pasta Salad",
+      "body": "A pasta salad with Root Veg, heirloom Tomatoes, Toasted Seeds, Black Kalamata Olives & Greek Feta Cheese",
+      "ref" : 'Salads'
+    },
+	  {
+      "menuId": 14,
+      "id": "Salad",
+      "title": "Haloumi & Peppadew Salad",
+      "body": "Bar Grilled Haloumi with seasonal Garden Leaves, heirloom Tomatoes, Toasted Seeds, Black Kalamata Olives & Greek Feta Cheese & Honey Mustard Dressing",
+      "ref" : 'Salads'
+    },
+	
+	  {
+      "menuId": 15,
+      "id": "Breakfast",
+      "title": "Waterford Breakfast",
+      "body": "Beef Sausage, Bacon, Grilled Tomato, Field Mushroom, Egg & Toast",
+      "ref" : 'Breakfasts'
+    },
+	  {
+      "menuId": 16,
+      "id": "Breakfast",
+      "title": "Beans With Hashbrown",
+      "body": "Seasoned beans served with Hashbrown",
+      "ref" : 'Breakfasts'
+    },
+	  {
+      "menuId": 17,
+      "id": "Breakfast",
+      "title": "Homemade Waffle",
+      "body": "Maple syrup",
+      "ref" : 'Breakfasts'
+    },
+	  {
+      "menuId": 18,
+      "id": "Breakfast",
+      "title": "Breakfast Fruit Bowl",
+      "body": "Seasonal fruit selection",
+      "ref" : 'Breakfasts'
+    },
+	  {
+      "menuId": 19,
+      "id": "Breakfast",
+      "title": "Oats",
+      "body": "Freshly prepared Oats served with honey & warm milk",
+      "ref" : 'Breakfasts'
+    },
+  ]
 
-//   const fixArr = () =>{
-//     var len = emailArray.length, i;
-//     for(i = 0; i < len; i++ ){
-//       emailArray[i] && emailArray.push(emailArray[i]);
-//     }
-//     emailArray.splice(0, len);
-
-//     console.log(emailArray)
-//   }
-
-//   useEffect(() => {
-//     fixArr();
-//   })
-
-//   return (
-//     <View>
-//       <Text>Test Screen</Text>
-//     </View>
-//     )
-// }
-
-// export default Test
 
 
+  useEffect(() => {
+    try {
+      setFilteredDataSource(data);
+      setMasterDataSource(data);
+    } catch (error) {
+      console.error(error);
+    } 
+  }, []);
 
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
-import * as firebase from 'firebase'
-
-export class Test extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      order_menu : "",
-      order_price : "",
-      order_quantity : "",
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter(
+        function (item) {
+          const itemData = item.title
+            ? item.title.toUpperCase()
+            : ''.toUpperCase();
+          const textData = text.toUpperCase();
+          return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
     }
-  }
+  };
 
-  fetchData(){
-    firebase.default.database()
-    .ref('orders/')
-    .on('value', snapshot => {
-      const data = snapshot.val();
-      this.setState({
-        order_menu : data.order_menu,
-        order_price : data.order_price,
-        order_quantity : data.order_quantity
-      })
-    })
-    console.log(this.order_menu);
-  }
-
-
-  displayQuantity(){
-    quantity.map(data => {
-      return(<td>{data}</td>)
-    })
-  }
-  
-
-  componentDidMount(){
-    this.fetchData();
-  }
-
-  render() {
+  const ItemView = ({item}) => {
     return (
-      <View>
-        <Text> Test Screen </Text>
+      // Flat List Item
+      <Text
+        style={styles.itemStyle}
+        onPress={() => getItem(item)}>
+        {item.id}
+        {' : '}
+        {item.title.toUpperCase()}
+      </Text>
+    );
+  };
+
+  const ItemSeparatorView = () => {
+    return (
+      // Flat List Item Separator
+      <View
+        style={{
+          height: 0.5,
+          width: '100%',
+          backgroundColor: '#C8C8C8',
+        }}
+      />
+    );
+  };
+
+  const getItem = (item) => {
+    // Function for click on an item
+    alert('Id : ' + item.id + ' Title : ' + item.title);
+  };
+
+  return (
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.textInputStyle}
+          onChangeText={(text) => searchFilterFunction(text)}
+          value={search}
+          underlineColorAndroid="transparent"
+          placeholder="Search Here"
+        />
+        <FlatList
+          data={filteredDataSource}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={ItemView}
+        />
       </View>
-    )
-  }
-}
+    </SafeAreaView>
+  );
+};
 
-export default Test
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  itemStyle: {
+    padding: 10,
+  },
+  textInputStyle: {
+    height: 40,
+    borderWidth: 1,
+    paddingLeft: 20,
+    margin: 5,
+    borderColor: '#009688',
+    backgroundColor: '#FFFFFF',
+  },
+});
 
-
-// fetchMenuElement(){
-//   menu.forEach(data => {
-//     return (<td>{data}</td>)
-//   });
-//   quantity.forEach(data => {
-//     return (<td>{data}</td>)
-//   });
-//   price.forEach(data => {
-//     return (<td>{data}</td>)
-//   });
-// }
-
-// displayMenus(){
-//   menu.map(data => {
-//     return(<td>{data}</td>)
-//   })
-// }
+export default Test;

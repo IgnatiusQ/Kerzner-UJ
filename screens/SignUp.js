@@ -16,12 +16,6 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [finalPassword, setFinalPassword] = useState("");
-    
-    //USER & DATABASE STATES
-    const [initializing, setInitializing] = useState(true);
-
-    const user = firebase.default.auth().currentUser;
     
     //ERROR MESSAGE
     let errorMessage = "";

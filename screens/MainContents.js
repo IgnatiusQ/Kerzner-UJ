@@ -41,7 +41,7 @@ const MainContents = () => {
     ]);
 
     const showAllCats = () =>{
-        null
+        navigation.navigate('AllMenus')
     }
     useEffect(() => {
         LogBox.ignoreAllLogs();
@@ -62,7 +62,7 @@ const MainContents = () => {
                     <TouchableOpacity
                         style={styles.viewAllButton}
                         underlayColor='#FFFFFF'
-                        onPress={showAllCats}    
+                        onPress={() => showAllCats()}    
                     >
                         <Text style={styles.viewAllText}>
                             View all

@@ -377,7 +377,7 @@ const Location = () => {
                 {
                     text: "Proceed",
                     onPress: () =>
-                        navigation.navigate("PickupOptions")
+                        navigation.navigate('PickupOptions')
                 }
             ],
             { cancelable: false }

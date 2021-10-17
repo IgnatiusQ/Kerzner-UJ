@@ -16,11 +16,12 @@ import MenuScreen from './screens/MenuScreen';
 import Cart from './screens/Cart.js';
 import Location from './screens/Location';
 import PickupOptions from './screens/PickupOptions.js';
-import SearchField from './screens/components/SearchField.js';
+import SearchField from './screens/components/SearchField.js'
+import SearchFieldReal from './screens/components/SearchFieldReal.js';
 import TabBar from './screens/components/TabBar.js';
 import Profile from './screens/Profile.js';
 
-// import Test from './screens/Test.js';
+import MainContents from './screens/MainContents.js';
 
 //IMPORTING MENUS FROM MENU FOLDER
 import Breakfasts from './screens/components/menus/Breakfasts';
@@ -31,6 +32,7 @@ import Salads from './screens/components/menus/Salads';
 import Sandwiches from './screens/components/menus/Sandwiches';
 import SignaturePizzas from './screens/components/menus/SignaturePizzas';
 import SpecialityBurgers from './screens/components/menus/SpecialityBurgers';
+import AllMenus from './screens/components/menus/AllMenus.js';
 
 //INSTALLED LIBRARIES:
 import { NavigationContainer } from '@react-navigation/native';
@@ -69,75 +71,79 @@ function App(){
 
   const [status, setStatus] = useState('');
 
-  const appState = () =>{
-    if(status == 'false'){
-      return(
-        <NavigationContainer style={styles.container}>
-        <Stack.Navigator initialRouteName = 'GetStarted'>
-          <Stack.Screen name='Splash' component={Splash} options={{headerShown:false}}/>
-          <Stack.Screen name='GetStarted' component={GetStarted} options={{headerShown:false}}/>
-          <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
-          <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
-          <Stack.Screen name='SearchField' component={SearchField} options={{headerShown:false}}/>
-          <Stack.Screen name='Main' component={Main} options={{headerShown:false}}/>
-          <Stack.Screen name='MenuScreen' component={MenuScreen} options={{headerShown:false}}/>
-          <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
-          <Stack.Screen name='Location' component={Location} options={{headerShown:false}}/>
-          <Stack.Screen name='PickupOptions' component={PickupOptions} options={{headerShown:false}}/>
+  // const appState = () =>{
+  //   if(status == 'false'){
+  //     return(
+  //       <NavigationContainer style={styles.container}>
+  //       <Stack.Navigator initialRouteName = 'GetStarted'>
+  //         <Stack.Screen name='Splash' component={Splash} options={{headerShown:false}}/>
+  //         <Stack.Screen name='GetStarted' component={GetStarted} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SearchField' component={SearchField} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SearchFieldReal' component={SearchFieldReal} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Main' component={Main} options={{headerShown:false}}/>
+  //         <Stack.Screen name='MenuScreen' component={MenuScreen} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Location' component={Location} options={{headerShown:false}}/>
+  //         <Stack.Screen name='PickupOptions' component={PickupOptions} options={{headerShown:false}}/>
 
-          <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}}/>
 
-          <Stack.Screen name='TabBar' component={TabBar} options={{headerShown:false}}/>
-
-          
-          {/* MAIN SCREEN STACK */}
-          {/* MENUS STACK */}
-          <Stack.Screen name='Deserts' component={Deserts} options={{headerShown:false}}/>
-          <Stack.Screen name='Drinks' component={Drinks} options={{headerShown:false}}/>
-          <Stack.Screen name='Breakfasts' component={Breakfasts} options={{headerShown:false}}/>
-          <Stack.Screen name='HotMeals' component={HotMeals} options={{headerShown:false}}/>
-          <Stack.Screen name='Salads' component={Salads} options={{headerShown:false}}/>
-          <Stack.Screen name='Sandwiches' component={Sandwiches} options={{headerShown:false}}/>
-          <Stack.Screen name='SignaturePizzas' component={SignaturePizzas} options={{headerShown:false}}/>
-          <Stack.Screen name='SpecialityBurgers' component={SpecialityBurgers} options={{headerShown:false}}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-      )
-    }
-    if(status == 'true'){
-      return(
-        <NavigationContainer style={styles.container}>
-        <Stack.Navigator initialRouteName = 'Login'>
-          <Stack.Screen name='Splash' component={Splash} options={{headerShown:false}}/>
-          <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
-          <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
-          <Stack.Screen name='SearchField' component={SearchField} options={{headerShown:false}}/>
-          <Stack.Screen name='Main' component={Main} options={{headerShown:false}}/>
-          <Stack.Screen name='MenuScreen' component={MenuScreen} options={{headerShown:false}}/>
-          <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
-          <Stack.Screen name='Location' component={Location} options={{headerShown:false}}/>
-          <Stack.Screen name='PickupOptions' component={PickupOptions} options={{headerShown:false}}/>
-
-          <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}}/>
-
-          <Stack.Screen name='TabBar' component={TabBar} options={{headerShown:false}}/>
+  //         <Stack.Screen name='TabBar' component={TabBar} options={{headerShown:false}}/>
 
           
-          {/* MAIN SCREEN STACK */}
-          {/* MENUS STACK */}
-          <Stack.Screen name='Deserts' component={Deserts} options={{headerShown:false}}/>
-          <Stack.Screen name='Drinks' component={Drinks} options={{headerShown:false}}/>
-          <Stack.Screen name='Breakfasts' component={Breakfasts} options={{headerShown:false}}/>
-          <Stack.Screen name='HotMeals' component={HotMeals} options={{headerShown:false}}/>
-          <Stack.Screen name='Salads' component={Salads} options={{headerShown:false}}/>
-          <Stack.Screen name='Sandwiches' component={Sandwiches} options={{headerShown:false}}/>
-          <Stack.Screen name='SignaturePizzas' component={SignaturePizzas} options={{headerShown:false}}/>
-          <Stack.Screen name='SpecialityBurgers' component={SpecialityBurgers} options={{headerShown:false}}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-      )
-    }
-  };
+  //         {/* MAIN SCREEN STACK */}
+  //         {/* MENUS STACK */}
+  //         <Stack.Screen name='Deserts' component={Deserts} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Drinks' component={Drinks} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Breakfasts' component={Breakfasts} options={{headerShown:false}}/>
+  //         <Stack.Screen name='HotMeals' component={HotMeals} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Salads' component={Salads} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Sandwiches' component={Sandwiches} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SignaturePizzas' component={SignaturePizzas} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SpecialityBurgers' component={SpecialityBurgers} options={{headerShown:false}}/>
+  //         <Stack.Screen name='AllMenus' component={AllMenus} options={{headerShown:false}}/>
+  //       </Stack.Navigator>
+  //     </NavigationContainer>
+  //     )
+  //   }
+  //   if(status == 'true'){
+  //     return(
+  //       <NavigationContainer style={styles.container}>
+  //       <Stack.Navigator initialRouteName = 'Login'>
+  //         <Stack.Screen name='Splash' component={Splash} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SearchField' component={SearchField} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SearchFieldReal' component={SearchFieldReal} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Main' component={Main} options={{headerShown:false}}/>
+  //         <Stack.Screen name='MenuScreen' component={MenuScreen} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Location' component={Location} options={{headerShown:false}}/>
+  //         <Stack.Screen name='PickupOptions' component={PickupOptions} options={{headerShown:false}}/>
+
+  //         <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}}/>
+
+  //         <Stack.Screen name='TabBar' component={TabBar} options={{headerShown:false}}/>
+
+          
+  //         {/* MAIN SCREEN STACK */}
+  //         {/* MENUS STACK */}
+  //         <Stack.Screen name='Deserts' component={Deserts} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Drinks' component={Drinks} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Breakfasts' component={Breakfasts} options={{headerShown:false}}/>
+  //         <Stack.Screen name='HotMeals' component={HotMeals} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Salads' component={Salads} options={{headerShown:false}}/>
+  //         <Stack.Screen name='Sandwiches' component={Sandwiches} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SignaturePizzas' component={SignaturePizzas} options={{headerShown:false}}/>
+  //         <Stack.Screen name='SpecialityBurgers' component={SpecialityBurgers} options={{headerShown:false}}/>
+  //         <Stack.Screen name='AllMenus' component={AllMenus} options={{headerShown:false}}/>
+  //       </Stack.Navigator>
+  //     </NavigationContainer>
+  //     )
+  //   }
+  // };
 
   useEffect(() => {
     LogBox.ignoreAllLogs();
@@ -163,13 +169,14 @@ function App(){
           <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
           <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
           <Stack.Screen name='SearchField' component={SearchField} options={{headerShown:false}}/>
+          <Stack.Screen name='SearchFieldReal' component={SearchFieldReal} options={{headerShown:false}}/>
           <Stack.Screen name='Main' component={Main} options={{headerShown:false}}/>
           <Stack.Screen name='MenuScreen' component={MenuScreen} options={{headerShown:false}}/>
           <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
           <Stack.Screen name='Location' component={Location} options={{headerShown:false}}/>
           <Stack.Screen name='PickupOptions' component={PickupOptions} options={{headerShown:false}}/>
 
-          {/* <Stack.Screen name='Test' component={Test} options={{headerShown:false}}/> */}
+          <Stack.Screen name='MainContents' component={MainContents} options={{headerShown:false}}/>
 
           <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}}/>
 
@@ -186,6 +193,7 @@ function App(){
           <Stack.Screen name='Sandwiches' component={Sandwiches} options={{headerShown:false}}/>
           <Stack.Screen name='SignaturePizzas' component={SignaturePizzas} options={{headerShown:false}}/>
           <Stack.Screen name='SpecialityBurgers' component={SpecialityBurgers} options={{headerShown:false}}/>
+          <Stack.Screen name='AllMenus' component={AllMenus} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>
