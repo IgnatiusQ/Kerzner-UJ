@@ -1,16 +1,5 @@
-// import React in our code
 import React, {useState, useEffect, useRef} from 'react';
-import {
-  LogBox,
-  KeyboardAvoidingView,
-  ScrollView,
-  Text,
-  StyleSheet,
-  View,
-  Dimensions,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { LogBox, Alert, KeyboardAvoidingView, ScrollView, Text, StyleSheet, View, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/core';
 import * as firebase from 'firebase';
@@ -18,7 +7,7 @@ import * as LocationLibrary from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import MapView, {Marker} from 'react-native-maps';
 
-const Test = () => {
+const LocationInfo = () => {
   
   const navigation = useNavigation();
 
@@ -36,108 +25,91 @@ const Test = () => {
   let priceVar = 0;
 
   //Breakfasts
-  const [breakfast1Status, setBreakfast1Status] = useState();
   const [menuBreakfast1, setmenuBreakfast1] = useState("");
   const [priceBreakfast1, setpriceBreakfast1] = useState("")
   const [quantityBreakfast1, setquantityBreakfast1] = useState("")
   const [keyBreakfast1, setkeyBreakfast1] = useState("")
 
-  const [breakfast2Status, setBreakfast2Status] = useState();
   const [menuBreakfast2, setmenuBreakfast2] = useState("");
   const [priceBreakfast2, setpriceBreakfast2] = useState("")
   const [quantityBreakfast2, setquantityBreakfast2] = useState("")
   const [keyBreakfast2, setkeyBreakfast2] = useState("")
 
-  const [breakfast3Status, setBreakfast3Status] = useState();
   const [menuBreakfast3, setmenuBreakfast3] = useState("");
   const [priceBreakfast3, setpriceBreakfast3] = useState("")
   const [quantityBreakfast3, setquantityBreakfast3] = useState("")
   const [keyBreakfast3, setkeyBreakfast3] = useState("")
 
   //Sandwiches
-  const [sandwich1Status, setSandwich1Status] = useState();
   const [menuSandwich1, setmenuSandwich1] = useState("");
   const [priceSandwich1, setpriceSandwich1] = useState("")
   const [quantitySandwich1, setquantitySandwich1] = useState("")
   const [keySandwich1, setkeySandwich1] = useState("")
 
-  const [sandwich2Status, setSandwich2Status] = useState();
   const [menuSandwich2, setmenuSandwich2] = useState("");
   const [priceSandwich2, setpriceSandwich2] = useState("")
   const [quantitySandwich2, setquantitySandwich2] = useState("")
   const [keySandwich2, setkeySandwich2] = useState("")
 
-  const [sandwich3Status, setSandwich3Status] = useState();
   const [menuSandwich3, setmenuSandwich3] = useState("");
   const [priceSandwich3, setpriceSandwich3] = useState("")
   const [quantitySandwich3, setquantitySandwich3] = useState("")
   const [keySandwich3, setkeySandwich3] = useState("")
 
   //Burgers
-  const [burger1Status, setBurger1Status] = useState();
   const [menuBurger1, setmenuBurger1] = useState("");
   const [priceBurger1, setpriceBurger1] = useState("")
   const [quantityBurger1, setquantityBurger1] = useState("")
   const [keyBurger1, setkeyBurger1] = useState("")
 
-  const [burger2Status, setBurger2Status] = useState();
   const [menuBurger2, setmenuBurger2] = useState("");
   const [priceBurger2, setpriceBurger2] = useState("")
   const [quantityBurger2, setquantityBurger2] = useState("")
   const [keyBurger2, setkeyBurger2] = useState("")
 
-  const [burger3Status, setBurger3Status] = useState();
   const [menuBurger3, setmenuBurger3] = useState("");
   const [priceBurger3, setpriceBurger3] = useState("")
   const [quantityBurger3, setquantityBurger3] = useState("")
   const [keyBurger3, setkeyBurger3] = useState("")
 
   //Pizzas
-  const [pizza1Status, setPizza1Status] = useState();
   const [menuPizza1, setmenuPizza1] = useState("");
   const [pricePizza1, setpricePizza1] = useState("")
   const [quantityPizza1, setquantityPizza1] = useState("")
   const [keyPizza1, setkeyPizza1] = useState("")
 
-  const [pizza2Status, setPizza2Status] = useState();
   const [menuPizza2, setmenuPizza2] = useState("");
   const [pricePizza2, setpricePizza2] = useState("")
   const [quantityPizza2, setquantityPizza2] = useState("")
   const [keyPizza2, setkeyPizza2] = useState("")
 
-  const [pizza3Status, setPizza3Status] = useState();
   const [menuPizza3, setmenuPizza3] = useState("");
   const [pricePizza3, setpricePizza3] = useState("")
   const [quantityPizza3, setquantityPizza3] = useState("")
   const [keyPizza3, setkeyPizza3] = useState("")
 
   //HotMeals
-  const [hotMeal1Status, setHotMeal1Status] = useState(true);
   const [menuHotMeal1, setmenuHotMeal1] = useState("");
   const [priceHotMeal1, setpriceHotMeal1] = useState("")
   const [quantityHotMeal1, setquantityHotMeal1] = useState("")
   const [keyHotMeal1, setkeyHotMeal1] = useState("")
 
-  const [hotMeal2Status, setHotMeal2Status] = useState();
   const [menuHotMeal2, setmenuHotMeal2] = useState("");
   const [priceHotMeal2, setpriceHotMeal2] = useState("")
   const [quantityHotMeal2, setquantityHotMeal2] = useState("")
   const [keyHotMeal2, setkeyHotMeal2] = useState("")
 
   //Salads
-  const [salad1Status, setSalad1Status] = useState();
   const [menuSalad1, setmenuSalad1] = useState("");
   const [priceSalad1, setpriceSalad1] = useState("")
   const [quantitySalad1, setquantitySalad1] = useState("")
   const [keySalad1, setkeySalad1] = useState("")
 
-  const [salad2Status, setSalad2Status] = useState();
   const [menuSalad2, setmenuSalad2] = useState("");
   const [priceSalad2, setpriceSalad2] = useState("")
   const [quantitySalad2, setquantitySalad2] = useState("")
   const [keySalad2, setkeySalad2] = useState("")
 
-  const [salad3Status, setSalad3Status] = useState();
   const [menuSalad3, setmenuSalad3] = useState("");
   const [priceSalad3, setpriceSalad3] = useState("")
   const [quantitySalad3, setquantitySalad3] = useState("")
@@ -147,7 +119,6 @@ const Test = () => {
   const fetchOrders = async() =>{
     //Breakfast1
     if(await AsyncStorage.getItem('Breakfasts01')){
-       setBreakfast1Status(true);
        try{
            let itemData1 = await AsyncStorage.getItem('Breakfasts01')
            let parsedItem1 = JSON.parse(itemData1);
@@ -164,7 +135,6 @@ const Test = () => {
 
    //Breakfast2
    if(await AsyncStorage.getItem('Breakfasts02')){
-       setBreakfast2Status(true);
        try{
            let itemData2 = await AsyncStorage.getItem('Breakfasts02');
            let parsedItem2 = JSON.parse(itemData2);
@@ -181,7 +151,6 @@ const Test = () => {
 
    //Breakfast3
    if(await AsyncStorage.getItem('Breakfasts03')){
-       setBreakfast3Status(true);
        try{
            let itemData3 = await AsyncStorage.getItem('Breakfasts03');
            let parsedItem3 = JSON.parse(itemData3);
@@ -198,7 +167,6 @@ const Test = () => {
 
    //Sandwich1
    if(await AsyncStorage.getItem('Sandwiches01')){
-       setSandwich1Status(true);
        try{
            let itemData4 = await AsyncStorage.getItem('Sandwiches01');
            let parsedItem4 = JSON.parse(itemData4);
@@ -215,7 +183,6 @@ const Test = () => {
 
    //Sandwich2
    if(await AsyncStorage.getItem('Sandwiches02')){
-       setSandwich2Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('Sandwiches02');
            let parsedItem5 = JSON.parse(itemData5);
@@ -232,7 +199,6 @@ const Test = () => {
 
    //Sandwich3
    if(await AsyncStorage.getItem('Sandwiches03')){
-       setSandwich3Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('Sandwiches03');
            let parsedItem5 = JSON.parse(itemData5);
@@ -248,7 +214,6 @@ const Test = () => {
 
    //Burger1
    if(await AsyncStorage.getItem('SpecialityBurgers01')){
-       setBurger1Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('SpecialityBurgers01');
            let parsedItem5 = JSON.parse(itemData5);
@@ -265,7 +230,6 @@ const Test = () => {
 
    //Burger2
    if(await AsyncStorage.getItem('SpecialityBurgers02')){
-       setBurger2Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('SpecialityBurgers02');
            let parsedItem5 = JSON.parse(itemData5);
@@ -282,7 +246,6 @@ const Test = () => {
 
    //Burger3
    if(await AsyncStorage.getItem('SpecialityBurgers03')){
-       setBurger3Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('SpecialityBurgers03');
            let parsedItem5 = JSON.parse(itemData5);
@@ -299,7 +262,6 @@ const Test = () => {
 
    //Pizza1
    if(await AsyncStorage.getItem('Pizzas01')){
-       setPizza1Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('Pizzas01');
            let parsedItem5 = JSON.parse(itemData5);
@@ -316,7 +278,6 @@ const Test = () => {
 
    //Pizza2
    if(await AsyncStorage.getItem('Pizzas02')){
-       setPizza2Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('Pizzas02');
            let parsedItem5 = JSON.parse(itemData5);
@@ -333,7 +294,6 @@ const Test = () => {
 
    //Pizza3
    if(await AsyncStorage.getItem('Pizzas03')){
-       setPizza3Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('Pizzas03');
            let parsedItem5 = JSON.parse(itemData5);
@@ -350,7 +310,6 @@ const Test = () => {
 
    //HotMeal1
    if(await AsyncStorage.getItem('HotMeals01')){
-       setHotMeal1Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('HotMeals01');
            let parsedItem5 = JSON.parse(itemData5);
@@ -369,7 +328,6 @@ const Test = () => {
 
    //HotMeal2
    if(await AsyncStorage.getItem('HotMeals02')){
-       setHotMeal2Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('HotMeals02');
            let parsedItem5 = JSON.parse(itemData5);
@@ -387,7 +345,6 @@ const Test = () => {
 
    //Salad1
    if(await AsyncStorage.getItem('Salads01')){
-       setSalad1Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('Salads01');
            let parsedItem5 = JSON.parse(itemData5);
@@ -404,7 +361,6 @@ const Test = () => {
 
    //Salad2
    if(await AsyncStorage.getItem('Salads02')){
-       setSalad2Status(true);
        try{
            let itemData5 = await AsyncStorage.getItem('Salads02');
            let parsedItem5 = JSON.parse(itemData5);
@@ -422,7 +378,6 @@ const Test = () => {
 
    //Salad3
    if(await AsyncStorage.getItem('Salads03')){
-      setSalad3Status(true);
       try{
           let itemData5 = await AsyncStorage.getItem('Salads03');
           let parsedItem5 = JSON.parse(itemData5);
@@ -600,6 +555,10 @@ const Test = () => {
         setLongitude(location.coords.longitude);
   }
 
+    const clearOrders = async() =>{
+        await AsyncStorage.clear();
+    };
+
   const finalOrder = () =>{
     try {
       firebase
@@ -649,6 +608,8 @@ const Test = () => {
   }
 
   useEffect(() =>{
+    LogBox.ignoreAllLogs();
+
     getLocation();
 
     if(_map.current) {
@@ -663,8 +624,6 @@ const Test = () => {
         5000
       );
     };
-
-    LogBox.ignoreAllLogs();
 
     fetchOrders();
     fetchPrices();
@@ -793,4 +752,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Test;
+export default LocationInfo;

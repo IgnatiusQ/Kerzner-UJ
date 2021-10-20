@@ -15,11 +15,13 @@ import Main from './screens/Main.js';
 import MenuScreen from './screens/MenuScreen';
 import Cart from './screens/Cart.js';
 import Location from './screens/Location';
+import LocationInfo from './screens/LocationInfo';
 import PickupOptions from './screens/PickupOptions.js';
 import SearchField from './screens/components/SearchField.js'
 import SearchFieldReal from './screens/components/SearchFieldReal.js';
 import TabBar from './screens/components/TabBar.js';
 import Profile from './screens/Profile.js';
+import PrivacyPolicy from './screens/PrivacyPolicy.js';
 
 // import Test from './screens/Test.js';
 
@@ -174,11 +176,13 @@ function App(){
           <Stack.Screen name='MenuScreen' component={MenuScreen} options={{headerShown:false}}/>
           <Stack.Screen name='Cart' component={Cart} options={{headerShown:false}}/>
           <Stack.Screen name='Location' component={Location} options={{headerShown:false}}/>
+          <Stack.Screen name='LocationInfo' component={LocationInfo} options={{headerShown:false}}/>
           <Stack.Screen name='PickupOptions' component={PickupOptions} options={{headerShown:false}}/>
 
           {/* <Stack.Screen name='Test' component={Test} options={{headerShown:false}}/> */}
 
           <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}}/>
+          <Stack.Screen name='PrivacyPolicy' component={PrivacyPolicy} options={{headerShown:false}}/>
 
           <Stack.Screen name='TabBar' component={TabBar} options={{headerShown:false}}/>
 

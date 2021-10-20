@@ -21,6 +21,11 @@ const Location = () => {
 
     const [orderType, setOrderType] = useState('PICKUP');
 
+    const [addrInfo, setAddrInfo] = useState("N/A");
+
+    const [ latitudeVal, setLatitude ] = useState(0);
+    const [ longitudeVal, setLongitude ] = useState(0);
+
     const [orderStatus, setOrderStatus] = useState(false);
 
     let priceVar = 0;
@@ -151,13 +156,6 @@ const Location = () => {
 
 
 
-    const region = {
-        latitude : "",
-        longitude : "",
-        latitudeDelta: 0.5,
-        longitudeDelta: 0.5
-    };
-
 
     const [finalPriceVar, setFinalPriceVar] = useState();
 
@@ -178,7 +176,7 @@ const Location = () => {
                     accessibilityIgnoresInvertColors={true}
                 />
                 <Text style={styles.optionText}>
-                    Card
+                    Card on delivery
                 </Text>
             </View>,
             value: 0
@@ -349,15 +347,22 @@ const Location = () => {
         setFinalPriceVar(priceVar)
     }
 
-    const cardPaymentAlert = () =>{
+    const currentLocationAlert = () =>{
         Alert.alert(
             "TheKerzner@UJ",
-            "The card-payment option is currently unavailable",
+            "Deliver to current location?",
             [
                 {
-                    text: "Ok",
+                    text: "Yes",
+                    onPress: () =>{
+                        pushOrder()
+                        successOrder()
+                    }
+                },
+                {
+                    text: "Set location",
                     onPress: () =>
-                        null
+                        navigation.navigate('LocationInfo')
                 }
             ],
             { cancelable: false }
@@ -371,13 +376,30 @@ const Location = () => {
             [
                 {
                     text: "No, thank you",
-                    onPress: () =>
+                    onPress: () =>{
+                        clearOrders(),
                         navigation.navigate('Main')
+                    }
                 },
                 {
                     text: "Proceed",
                     onPress: () =>
                         navigation.navigate('PickupOptions')
+                }
+            ],
+            { cancelable: false }
+        );
+    };
+
+    const cardPickupWarn = () =>{
+        Alert.alert(
+            "TheKerzner@UJ",
+            "The Pick Up delivery method cannot be paid with Card On Delivery",
+            [
+                {
+                    text: "Okay",
+                    onPress: () =>
+                        null
                 }
             ],
             { cancelable: false }
@@ -395,9 +417,10 @@ const Location = () => {
             [
                 {
                     text: "Return to menu",
-                    onPress: () =>
-                        navigation.navigate('Main'),
-                        clearOrders
+                    onPress: () =>{
+                        clearOrders(),
+                        navigation.navigate('Main')
+                    }
                 }
             ],
             { cancelable: false }
@@ -708,10 +731,9 @@ const Location = () => {
         }
 
         let location = await LocationLibrary.getCurrentPositionAsync({enableHighAccuracy: true});
-        region.latitude = location.coords.latitude;
-        region.longitude = location.coords.longitude
-
-        console.log('latitude : ', region.latitude,"\n", 'longitude : ', region.longitude,"\n");
+        setLatitude(location.coords.latitude);
+        setLongitude(location.coords.longitude)
+        console.log("longitude:",longitudeVal, "\n", "latitude:", latitudeVal)
     }
 
     //PUSH TO FIREBASE
@@ -723,7 +745,13 @@ const Location = () => {
     const finishOrder = () =>{
         if(paymentOption == 0){
             console.log('card payment');
-            cardPaymentAlert();
+            if(deliveryOption == 0){
+                console.log('pick up');
+                cardPickupWarn();
+            }else{
+                console.log('delivery');
+                currentLocationAlert()
+            }
         }else{
             console.log('cash payment')
 
@@ -736,8 +764,7 @@ const Location = () => {
                 console.log(auth.email)
             }else{
                 console.log('Delivery');
-                pushOrder();
-                successOrder();
+                currentLocationAlert();
                 
 
                 console.log(auth.email)
@@ -791,6 +818,11 @@ const Location = () => {
                     total_order_price : "R "+priceVar+".00",
 
                     order_type : orderType,
+
+                    location_latitude : latitudeVal,
+                    location_longitude : longitudeVal,
+
+                    location_info : addrInfo,
 
                     order_ref : auth.uid +" "+currentDate
                 });

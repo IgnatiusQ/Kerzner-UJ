@@ -14,6 +14,9 @@ const TabBar = () => {
   const toProfile = () =>{
     navigation.navigate('Profile')
   }
+  const toPrivacyPolicy = () =>{
+    navigation.navigate('PrivacyPolicy')
+  }
 
   const signOut = () =>{
     firebase.default
@@ -79,7 +82,10 @@ const TabBar = () => {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.fieldContainer}>
+        <TouchableOpacity
+          style={styles.fieldContainer}
+          onPress={toPrivacyPolicy}  
+        >
           <FontAwesome
             style={styles.profileIcon}
             name='wpforms'
