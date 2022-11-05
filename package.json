@@ -17,15 +17,15 @@
     "@react-navigation/bottom-tabs": "^5.11.10",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.4",
-    "expo": "^40.0.1",
-    "expo-cli": "^4.2.1",
+    "expo": "^41.0.0",
+    "expo-cli": "^5.0.5",
     "expo-google-sign-in": "^9.2.1",
     "expo-image-picker": "~9.2.0",
     "expo-location": "~10.0.0",
     "expo-permissions": "~10.0.0",
-    "firebase": "^8.9.1",
+    "firebase": "^8.10.1",
     "react": "16.13.1",
-    "react-native": "0.63.4",
+    "react-native": "0.68.0",
     "react-native-drawer": "^2.5.1",
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "^1.10.3",
@@ -49,7 +49,7 @@
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "sharp-cli": "^1.15.0"
+    "sharp-cli": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.13.1",
